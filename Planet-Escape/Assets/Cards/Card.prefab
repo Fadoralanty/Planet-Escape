@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315a7440f936dc54bad5d07711deb69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveBackToHandTime: 0.15
 --- !u!114 &8493487342445613884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134341758d037e74e9a28d0d1bdb1fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  targetScale: {x: 1.17, y: 1.17, z: 1.17}
+  handTransform: {fileID: 0}
+  onMouseHoverHeight: 150
 --- !u!95 &458100039067140702
 Animator:
   serializedVersion: 5
