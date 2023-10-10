@@ -14,7 +14,7 @@ public class Damageable : MonoBehaviour
     {
         SetCurrentLife(maxLife);
     }
-
+    
     public bool IsAlive() => _currentLife > 0;
     public void SetCurrentLife(float life) => _currentLife = life;
     public void TakeDamage(float damage)

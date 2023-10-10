@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Card_SO CardSo;
+    public Image Image;
+    public Image border;
+    public TextMeshProUGUI Name;
+    public TextMeshProUGUI Description;
+    public TextMeshProUGUI cost;
 
-    // Update is called once per frame
-    void Update()
+    public void SetData(Card_SO cardSo)
     {
-        
+        CardSo = cardSo;
+        Image.sprite = cardSo.CardIcon;
+        Name.text = CardSo.CardName;
+        Description.text = CardSo.CardDescription;
+        cost.text = CardSo.CardCost.ToString();
     }
 }
