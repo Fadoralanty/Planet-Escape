@@ -10,15 +10,15 @@ public class Hand : MonoBehaviour
     [SerializeField] private int cardSpacingMultiplier = 15;
     [SerializeField] private float cardRotationMultiplier = 15;
     [SerializeField] private float cardHeightMultiplier = 15;
-    [SerializeField] private List<GameObject> cardsInHand;
-    
+    [SerializeField] private List<Card> cardsInHand;
+
     private void Awake()
     {
         SetCardsSpacing();
         SetCardsHeight();
         RotateCards();
     }
-
+    
     private void RotateCards()
     {
         foreach (var card in cardsInHand)

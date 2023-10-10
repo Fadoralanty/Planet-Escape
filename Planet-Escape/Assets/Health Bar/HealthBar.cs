@@ -30,7 +30,7 @@ public class HealthBar : MonoBehaviour
         _damageable.OnTakeDamage += FillHealthbar;
         InitHealthBarColor();
     }
-    
+
     private void InitHealthBarColor()
     {
         _healthBar.color = _healthBarColor;
