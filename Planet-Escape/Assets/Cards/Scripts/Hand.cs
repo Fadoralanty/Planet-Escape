@@ -10,31 +10,62 @@ public class Hand : MonoBehaviour
     [SerializeField] private int cardSpacingMultiplier = 15;
     [SerializeField] private float cardRotationMultiplier = 15;
     [SerializeField] private float cardHeightMultiplier = 15;
-    [SerializeField] private List<Card> cardsInHand;
-
+    [SerializeField] private List<CardUI> InactiveCards;
+    [SerializeField] private List<CardUI> activeCards;
+    private float _proportion;
     private void Awake()
     {
+        activeCards = new List<CardUI>();
+        foreach (var card in InactiveCards)
+        {
+            card.gameObject.SetActive(false);
+        }
+    }
+
+    public void ActivateCard(Card_SO cardSo)
+    {
+        activeCards.Add(InactiveCards[0]);
+        InactiveCards[0].gameObject.SetActive(true);
+        InactiveCards[0].SetData(cardSo);
+        InactiveCards.Remove(InactiveCards[0]);
+    }
+    public void DeActivateCard()
+    {
+        
+    }
+
+    public void UpdateHand()
+    {
+        _proportion = activeCards.Count / 10f;
         SetCardsSpacing();
         SetCardsHeight();
         RotateCards();
+        foreach (var card in activeCards)
+        {
+            if (card.CanBePlayed())
+            {
+                card.border.gameObject.SetActive(true);
+            }
+        }
     }
-    
     private void RotateCards()
     {
-        foreach (var card in cardsInHand)
+        foreach (var card in activeCards)
         {
-            float handRatio = (float)card.transform.GetSiblingIndex() / (cardsInHand.Count - 1);
-            float rotation = Mathf.SmoothStep(-cardRotationMultiplier, cardRotationMultiplier, handRatio);
+            float handRatio = (float)card.transform.GetSiblingIndex() / (activeCards.Count - 1);
+            float rotation = Mathf.SmoothStep(-cardRotationMultiplier * _proportion,
+                cardRotationMultiplier* _proportion, handRatio);
             card.transform.rotation = Quaternion.Euler(0,0, -rotation); 
         }
     }
 
     private void SetCardsHeight()
     {
-        foreach (var card in cardsInHand)
+        foreach (var card in activeCards)
         {
-            float handRatio = (float)card.transform.GetSiblingIndex() / (cardsInHand.Count - 1);
-            float height = Mathf.Abs( Mathf.Lerp(cardHeightMultiplier, -cardHeightMultiplier, handRatio));
+            float handRatio = (float)card.transform.GetSiblingIndex() / (activeCards.Count - 1);
+            float height = Mathf.Abs( Mathf.Lerp(cardHeightMultiplier * _proportion,
+                -cardHeightMultiplier * _proportion, handRatio));
             card.transform.position -= new Vector3(0, height, 0);
             // if (handRatio is 0 or 1 )
             // {
@@ -44,11 +75,12 @@ public class Hand : MonoBehaviour
     }
     private void SetCardsSpacing()
     {
-        if (cardsInHand.Count < 1) { return; }
-        foreach (var card in cardsInHand)
+        if (activeCards.Count < 1) { return; }
+        foreach (var card in activeCards)
         {
-            float handRatio = (float)card.transform.GetSiblingIndex() / (cardsInHand.Count - 1);
-            float spacing = Mathf.Lerp(-cardSpacingMultiplier / 2, cardSpacingMultiplier / 2, handRatio);
+            float handRatio = (float)card.transform.GetSiblingIndex() / (activeCards.Count - 1);
+            float spacing = Mathf.Lerp(-cardSpacingMultiplier * _proportion,
+                cardSpacingMultiplier * _proportion , handRatio);
             card.transform.position += new Vector3(spacing , 0, 0); 
         }
     }

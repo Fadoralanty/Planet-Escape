@@ -7,7 +7,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler,IPoint
 {
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
+        // CardUI card= eventData.pointerDrag.GetComponent<CardUI>();
+        // Debug.Log(card.CardSo.CardName + " was dropped on " + gameObject.name);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

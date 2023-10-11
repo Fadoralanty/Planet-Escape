@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+public class CardUI : MonoBehaviour
 {
     public Card_SO CardSo;
     public Image Image;
@@ -22,5 +22,11 @@ public class Card : MonoBehaviour
         Name.text = CardSo.CardName;
         Description.text = CardSo.CardDescription;
         cost.text = CardSo.CardCost.ToString();
+        gameObject.name = CardSo.CardName;
+    }
+
+    public bool CanBePlayed()
+    {
+        return CardSo.CardCost <= BattleManager.Singleton.CurrentEnergy;
     }
 }
