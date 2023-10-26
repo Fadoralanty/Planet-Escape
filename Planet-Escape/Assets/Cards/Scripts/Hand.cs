@@ -11,7 +11,10 @@ public class Hand : MonoBehaviour
     [SerializeField] private float cardRotationMultiplier = 15;
     [SerializeField] private float cardHeightMultiplier = 15;
     [SerializeField] private List<CardUI> InactiveCards;
+    public List<CardUI> ActiveCards => activeCards;
     [SerializeField] private List<CardUI> activeCards;
+
+
     private float _proportion;
     private void Awake()
     {
@@ -29,11 +32,20 @@ public class Hand : MonoBehaviour
         InactiveCards[0].SetData(cardSo);
         InactiveCards.Remove(InactiveCards[0]);
     }
-    public void DeActivateCard()
+    public void DeActivateCard(CardUI cardUI)
     {
-        
+        InactiveCards.Add(cardUI);
+        cardUI.gameObject.SetActive(false);
+        activeCards.Remove(cardUI);
     }
 
+    public void DeactivateAllCards()
+    {
+        foreach (var cardUI in activeCards)
+        {
+            DeActivateCard(cardUI);
+        }
+    }
     public void UpdateHand()
     {
         _proportion = activeCards.Count / 10f;

@@ -10,13 +10,15 @@ public class Damageable : MonoBehaviour
     [SerializeField] private float maxLife = 100;
     [SerializeField] private float _currentLife;
 
-    private void Awake()
+    public void SetData(float maxHealth)
     {
-        SetCurrentLife(maxLife);
+        maxLife = maxHealth;
+        SetCurrentLife(maxHealth);
     }
     
     public bool IsAlive() => _currentLife > 0;
     public void SetCurrentLife(float life) => _currentLife = life;
+    public void SetMaxLife(float life) => maxLife = life;
     public void TakeDamage(float damage)
     {
         if (IsAlive())

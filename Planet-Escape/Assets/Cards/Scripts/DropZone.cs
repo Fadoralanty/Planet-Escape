@@ -7,10 +7,14 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler,IPoint
 {
     public void OnDrop(PointerEventData eventData)
     {
-        // CardUI card= eventData.pointerDrag.GetComponent<CardUI>();
+        CardUI card= eventData.pointerDrag.GetComponent<CardUI>();
         // Debug.Log(card.CardSo.CardName + " was dropped on " + gameObject.name);
+        if (card.CardSo.CardTargetType == CardTargetType.Enemy)
+        {
+            BattleManager.Singleton.PlayCard(card);
+        }
     }
-
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
        
