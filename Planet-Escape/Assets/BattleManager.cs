@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,10 +20,12 @@ public class BattleManager : MonoBehaviour
     [Header("Energy")]
     public int MaxEnergy;
     public int CurrentEnergy;
+    public TextMeshProUGUI EnergyText;
     public enum Turn {Player,Enemy};
     [Header("Turns")]
     public Turn currentTurn;
     public Button EndturnButton;
+    public Animator TurnBannerAnimator;
     [Header("Enemies")] 
     public List<GameObject> PossibleEnemies;
     public List<GameObject> CurrentEnemies;
@@ -59,6 +62,7 @@ public class BattleManager : MonoBehaviour
         
         CurrentEnergy = MaxEnergy;
         //update energy UI
+        TurnBannerAnimator.Play("PlayerTurn");
     }
     private void InstantiateEnemies(int amount)
     {
@@ -100,10 +104,36 @@ public class BattleManager : MonoBehaviour
         Hand.UpdateHand();
     }
 
-    public void PlayCard(Card_SO card)
+    public void DiscardHand()
     {
-        if (card.CardCost > CurrentEnergy) return;
+        foreach (var card in cardsInHand)
+        {
+            DiscardCard(card);
+        }
+        Hand.DeactivateAllCards();
+    }
+
+    public void DiscardCard(Card_SO card)
+    {
+        discardPile.Add(card);
+        //Update DiscardPile Textmeshpro
+    }
+    public void PlayCard(CardUI card)
+    {
+        if (card.CardSo.CardCost > CurrentEnergy) return;
         
+        //PERFORM CARD ACTION
+
+        CurrentEnergy -= card.CardSo.CardCost;
+        EnergyText.text = CurrentEnergy.ToString();
+
+        cardsInHand.Remove(card.CardSo);
+        Hand.DeActivateCard(card);
+        
+        discardPile.Add(card.CardSo);
+        //update discard pile counter TMpro
+
+
     }
     private void EndCombat()
     {
@@ -116,8 +146,12 @@ public class BattleManager : MonoBehaviour
         {
             currentTurn = Turn.Enemy;
             EndturnButton.enabled = false;
-            //TODO Discard Hando
+            DiscardHand();
+            
             // REset enemy block
+            
+            //Show That its the enemy turn
+            
         }
         else if(currentTurn == Turn.Enemy)
         {
@@ -132,9 +166,10 @@ public class BattleManager : MonoBehaviour
         }
         
     }
+    
     private void EndTurn()
     {
-        
+        ChangeTurn();
     }
     
 }
