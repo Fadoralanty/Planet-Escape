@@ -35,16 +35,18 @@ public class Hand : MonoBehaviour
     public void DeActivateCard(CardUI cardUI)
     {
         InactiveCards.Add(cardUI);
-        cardUI.gameObject.SetActive(false);
         activeCards.Remove(cardUI);
+        cardUI.gameObject.SetActive(false);
     }
 
     public void DeactivateAllCards()
     {
         foreach (var cardUI in activeCards)
         {
-            DeActivateCard(cardUI);
+            InactiveCards.Add(cardUI);
+            cardUI.gameObject.SetActive(false);
         }
+        activeCards.Clear();
     }
     public void UpdateHand()
     {
