@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour
     public List<Card_SO> discardPile = new List<Card_SO>();
     public List<Card_SO> cardsInHand = new List<Card_SO>();
     public int maxCardsInHand = 10;
+    public int CardsDrawnPerTurn = 5;
     [Header("Energy")]
     public int MaxEnergy;
     public int CurrentEnergy;
@@ -58,7 +59,7 @@ public class BattleManager : MonoBehaviour
         drawPile.Clear();
         discardPile.AddRange(GameManager.Singleton.PlayersDeck);
         ShuffleDeck();
-        DrawCards(5);
+        DrawCards(CardsDrawnPerTurn);
         
         CurrentEnergy = MaxEnergy;
         //update energy UI
@@ -106,16 +107,18 @@ public class BattleManager : MonoBehaviour
 
     public void DiscardHand()
     {
+        Hand.DeactivateAllCards();
         foreach (var card in cardsInHand)
         {
-            DiscardCard(card);
+            discardPile.Add(card);
         }
-        Hand.DeactivateAllCards();
+        cardsInHand.Clear();
     }
 
     public void DiscardCard(Card_SO card)
     {
         discardPile.Add(card);
+        cardsInHand.Remove(card);
         //Update DiscardPile Textmeshpro
     }
     public void PlayCard(CardUI card)
@@ -146,23 +149,28 @@ public class BattleManager : MonoBehaviour
         {
             currentTurn = Turn.Enemy;
             EndturnButton.enabled = false;
+            
             DiscardHand();
             
+            TurnBannerAnimator.Play("EnemyTurn");
             // REset enemy block
             
             //Show That its the enemy turn
+            
+            //make all enemies do their action
+            
             
         }
         else if(currentTurn == Turn.Enemy)
         {
             //display enemy intent
             currentTurn = Turn.Player;
+            TurnBannerAnimator.Play("PlayerTurn");
             EndturnButton.enabled = true;
             //reset player block
             CurrentEnergy = MaxEnergy;
             //show energy
-            //draw 5 cards
-            
+            DrawCards(CardsDrawnPerTurn);
         }
         
     }
