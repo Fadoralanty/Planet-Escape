@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class ZoomIn : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
     [SerializeField] private Transform handTransform;
+    [SerializeField] private RectTransform rectTransform;
     [SerializeField] private float onMouseHoverHeight = 150f;
     private Animator _animator;
     private Quaternion _lastRotation;
@@ -26,19 +27,25 @@ public class ZoomIn : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         _lastPosition = transform1.position;
     }
 
+    public void SetLastTransform(Vector2 newPos, Quaternion newRot)
+    {
+        _lastPosition = newPos;
+        _lastRotation= newRot;
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         _animator.Play("OnHoverEnter");
         transform.SetSiblingIndex(handTransform.childCount);
-        transform.rotation = Quaternion.Euler(Vector3.zero);
-        transform.position = new Vector3(transform.position.x, onMouseHoverHeight);
+        rectTransform.rotation = Quaternion.Euler(Vector3.zero);
+        _lastPosition = rectTransform.anchoredPosition;
+        rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, onMouseHoverHeight);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         _animator.Play("OnHoverExit");
         transform.SetSiblingIndex(lastSiblingIndex);
-        transform.rotation = _lastRotation;
-        transform.position = _lastPosition;
+        rectTransform.rotation = _lastRotation;
+        rectTransform.anchoredPosition = _lastPosition;
     }
 
 }

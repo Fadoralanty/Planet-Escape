@@ -36,6 +36,7 @@ public class Hand : MonoBehaviour
     {
         InactiveCards.Add(cardUI);
         activeCards.Remove(cardUI);
+        cardUI.transform.SetSiblingIndex(10);
         cardUI.gameObject.SetActive(false);
     }
 
@@ -48,18 +49,31 @@ public class Hand : MonoBehaviour
         }
         activeCards.Clear();
     }
+
+    public void ResetCardsTransform()
+    {
+        foreach (var card in activeCards)
+        {
+            card.RectTransform.localPosition = Vector3.zero;
+            card.transform.rotation = quaternion.Euler(Vector3.zero);
+        }
+    }
     public void UpdateHand()
     {
+        ResetCardsTransform();
         _proportion = activeCards.Count / 10f;
         SetCardsSpacing();
         SetCardsHeight();
         RotateCards();
         foreach (var card in activeCards)
         {
-            if (card.CanBePlayed())
-            {
-                card.border.gameObject.SetActive(true);
-            }
+            Vector2 newPosition = card.RectTransform.anchoredPosition;
+            Quaternion newRotation = card.RectTransform.localRotation;
+            
+            card.Dragable.SetLastTransform(newPosition, newRotation);
+            card.ZoomIn.SetLastTransform(newPosition, newRotation);
+            
+            card.border.gameObject.SetActive(card.CanBePlayed());
         }
     }
     private void RotateCards()
