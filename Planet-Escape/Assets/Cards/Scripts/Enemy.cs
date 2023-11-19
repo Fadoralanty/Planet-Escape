@@ -1,15 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character
+public class Enemy : Character
 {
-    public PlayerSO playerStats;
+    [SerializeField] private EnemySO _enemySo;
     public Damageable Damageable => _damageable;
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
-        _damageable.SetData(playerStats.MaxHealth);
+        _damageable.SetData(_enemySo.MaxHealth);
     }
 }

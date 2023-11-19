@@ -15,7 +15,10 @@ MonoBehaviour:
   CardName: Defend
   CardDescription: Gain 5 Defend
   CardCost: 1
-  CardEffectAmount: 5
-  CardIcon: {fileID: 0}
   CardType: 1
-  CardTargetType: 0
+  CardIcon: {fileID: 0}
+  _cardActions:
+  - actionType: 1
+    amount: 5
+    Repetitions: 0
+    targetType: 0

@@ -2,15 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum CardType{Attack,Skill,Item}
-public enum CardTargetType{Self,Enemy,AllEnemies}
+public enum TargetType{Self,SingleEnemy,AllEnemies,RandomEnemy}
+
+public enum CardActionType
+{
+    DealDamage,
+    GainBlock,
+    DrawCards
+}
 [CreateAssetMenu(fileName = "New Card")]
 public class Card_SO : ScriptableObject
 {
     public string CardName;
     public string CardDescription;
     public int CardCost;
-    public int CardEffectAmount;
-    public Sprite CardIcon;
     public CardType CardType;
-    public CardTargetType CardTargetType;
+    public Sprite CardIcon;
+    public List<CardAction> _cardActions;
+    public TargetType targetType;
+    [System.Serializable]
+    public struct CardAction
+    {
+        public CardActionType actionType;
+        public int amount;
+        public int Repetitions;
+        
+    }
 }
