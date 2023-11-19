@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a48a24575264c5d4eb3991356e9f1f11, type: 3}
-  m_Name: Survivor
+  m_Script: {fileID: 11500000, guid: b6250b89fc263ed4eadd28cd81b74845, type: 3}
+  m_Name: Example
   m_EditorClassIdentifier: 
-  playerCharacterName: Survivor
-  maxHealth: 75
+  enemyName: Example
+  maxHealth: 25

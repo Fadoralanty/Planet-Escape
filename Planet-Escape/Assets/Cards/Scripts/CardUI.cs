@@ -9,12 +9,14 @@ using UnityEngine.UI;
 public class CardUI : MonoBehaviour
 {
     public Card_SO CardSo;
+    public RectTransform RectTransform;
     public Image Image;
     public Image border;
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Description;
     public TextMeshProUGUI cost;
-
+    public Dragable Dragable;
+    public ZoomIn ZoomIn;
     public void SetData(Card_SO cardSo)
     {
         CardSo = cardSo;

@@ -510,6 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4615389132982284578}
   - component: {fileID: 4615389132982284588}
+  - component: {fileID: 8745918548454870390}
   - component: {fileID: 6443119982100793260}
   - component: {fileID: 2770692694947473319}
   - component: {fileID: 8493487342445613884}
@@ -557,6 +558,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615389132982284577}
   m_CullTransparentMesh: 1
+--- !u!114 &8745918548454870390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615389132982284577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e278ecdebec67864b8a834586ce5944f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6443119982100793260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,11 +583,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardSo: {fileID: 0}
+  RectTransform: {fileID: 4615389132982284578}
   Image: {fileID: 4615389132858560103}
   border: {fileID: 7482233257260444274}
   Name: {fileID: 677099005624497756}
   Description: {fileID: 2417701331718928766}
   cost: {fileID: 1692496866397749526}
+  Dragable: {fileID: 2770692694947473319}
+  ZoomIn: {fileID: 8493487342445613884}
 --- !u!114 &2770692694947473319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveBackToHandTime: 0.15
+  _canvasGroup: {fileID: 7046667232539260577}
 --- !u!114 &8493487342445613884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTransform: {fileID: 0}
-  onMouseHoverHeight: 180
+  rectTransform: {fileID: 4615389132982284578}
+  onMouseHoverHeight: 100
 --- !u!95 &458100039067140702
 Animator:
   serializedVersion: 5

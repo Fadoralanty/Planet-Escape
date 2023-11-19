@@ -10,7 +10,8 @@ using Random = System.Random;
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Singleton;
-
+    [Header("Player")] 
+    public Player Player;
     [Header("Cards")] 
     public Hand Hand;
     public List<Card_SO> drawPile = new List<Card_SO>();
@@ -18,6 +19,9 @@ public class BattleManager : MonoBehaviour
     public List<Card_SO> cardsInHand = new List<Card_SO>();
     public int maxCardsInHand = 10;
     public int CardsDrawnPerTurn = 5;
+    public ActionHandler ActionHandler;
+    public TextMeshProUGUI drawPileText;
+    public TextMeshProUGUI discardPileText;
     [Header("Energy")]
     public int MaxEnergy;
     public int CurrentEnergy;
@@ -29,9 +33,10 @@ public class BattleManager : MonoBehaviour
     public Animator TurnBannerAnimator;
     [Header("Enemies")] 
     public List<GameObject> PossibleEnemies;
-    public List<GameObject> CurrentEnemies;
+    public List<Damageable> CurrentEnemies;
+    public Damageable SelectedEnemy;
     
-
+    private Random random = new Random();
     private void Awake()
     {
         if (Singleton == null)
@@ -59,8 +64,10 @@ public class BattleManager : MonoBehaviour
         drawPile.Clear();
         discardPile.AddRange(GameManager.Singleton.PlayersDeck);
         ShuffleDeck();
+        
         DrawCards(CardsDrawnPerTurn);
         
+        drawPileText.text = drawPile.Count.ToString();
         CurrentEnergy = MaxEnergy;
         //update energy UI
         TurnBannerAnimator.Play("PlayerTurn");
@@ -75,7 +82,6 @@ public class BattleManager : MonoBehaviour
 
     private void ShuffleDeck()
     {
-        Random random = new Random();
         for (var i = discardPile.Count - 1; i > 0; i--)
         {
             var temp = discardPile[i];
@@ -86,7 +92,7 @@ public class BattleManager : MonoBehaviour
 
         drawPile = discardPile;
         discardPile = new List<Card_SO>();
-        //update discard pile counter/text
+        discardPileText.text = discardPile.Count.ToString();
     }
     public void DrawCards(int amountToDraw)
     {
@@ -100,6 +106,7 @@ public class BattleManager : MonoBehaviour
             Hand.ActivateCard(drawPile[0]);
             drawPile.Remove(drawPile[0]);
             // Update drawpile numbre counter TMpro
+            drawPileText.text = drawPile.Count.ToString();
             cardsDrawn++;
         }
         Hand.UpdateHand();
@@ -126,17 +133,42 @@ public class BattleManager : MonoBehaviour
         if (card.CardSo.CardCost > CurrentEnergy) return;
         
         //PERFORM CARD ACTION
+        PerformCardActions(card.CardSo._cardActions, card.CardSo.targetType);
 
         CurrentEnergy -= card.CardSo.CardCost;
         EnergyText.text = CurrentEnergy.ToString();
 
         cardsInHand.Remove(card.CardSo);
         Hand.DeActivateCard(card);
+        Hand.UpdateHand();
         
         discardPile.Add(card.CardSo);
         //update discard pile counter TMpro
+        discardPileText.text = discardPile.Count.ToString();
 
+    }
 
+    public void PerformCardActions(List<Card_SO.CardAction> cardActions, TargetType targetType)
+    {
+        foreach (var cardAction in cardActions)
+        {
+            switch (targetType)
+            {
+                case TargetType.Self:
+                    ActionHandler.DoActionSingle(cardAction, Player.Damageable);
+                    break;
+                case TargetType.SingleEnemy:
+                    ActionHandler.DoActionSingle(cardAction, SelectedEnemy);
+                    break;
+                case TargetType.AllEnemies:
+                    ActionHandler.DoActionMultiple(cardAction, CurrentEnemies);
+                    break;
+                case TargetType.RandomEnemy:
+                    int rndIndex = random.Next(CurrentEnemies.Count);
+                    ActionHandler.DoActionSingle(cardAction, CurrentEnemies[rndIndex]);
+                    break;
+            }
+        }
     }
     private void EndCombat()
     {
