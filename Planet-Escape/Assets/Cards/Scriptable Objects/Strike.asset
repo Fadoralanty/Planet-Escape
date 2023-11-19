@@ -15,7 +15,10 @@ MonoBehaviour:
   CardName: Strike
   CardDescription: Deals 6 Damage
   CardCost: 1
-  CardEffectAmount: 6
-  CardIcon: {fileID: 0}
   CardType: 0
-  CardTargetType: 1
+  CardIcon: {fileID: 0}
+  _cardActions:
+  - actionType: 0
+    amount: 6
+    Repetitions: 0
+  targetType: 1

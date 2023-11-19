@@ -9,6 +9,7 @@ public class Damageable : MonoBehaviour
     public float MaxLife => maxLife;
     [SerializeField] private float maxLife = 100;
     [SerializeField] private float _currentLife;
+    [SerializeField] private float _currentBlock;
 
     public void SetData(float maxHealth)
     {
@@ -23,8 +24,14 @@ public class Damageable : MonoBehaviour
     {
         if (IsAlive())
         {
+            if (_currentBlock > 0)
+            {
+                _currentBlock -= damage;
+            }
+            
             _currentLife -= damage;
             OnTakeDamage?.Invoke(_currentLife);
+            
         }
         else
         {
@@ -33,6 +40,15 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public void GainBlock(float block)
+    {
+        _currentBlock += block;
+    }
+
+    public void RemoveBlock()
+    {
+        _currentBlock = 0;
+    }
     public void Die()
     {
         //Destroy(gameObject, 3f);
