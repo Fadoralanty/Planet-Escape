@@ -16,13 +16,13 @@ public class ActionHandler : MonoBehaviour
     {
         switch (action.actionType)
         {
-            case CardActionType.DealDamage:
+            case ActionType.DealDamage:
                 DealDamage(action.amount, target);
                 break;
-            case CardActionType.GainBlock:
+            case ActionType.GainBlock:
                 GainBlock(action.amount, target);
                 break;
-            case CardActionType.DrawCards:
+            case ActionType.DrawCards:
                 BattleManager.Singleton.DrawCards(action.amount);
                 break;
         }

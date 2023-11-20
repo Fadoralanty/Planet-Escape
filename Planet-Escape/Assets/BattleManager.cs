@@ -120,6 +120,7 @@ public class BattleManager : MonoBehaviour
             discardPile.Add(card);
         }
         cardsInHand.Clear();
+        discardPileText.text = discardPile.Count.ToString();
     }
 
     public void DiscardCard(Card_SO card)
@@ -175,7 +176,7 @@ public class BattleManager : MonoBehaviour
         //instantiate enemies
     }
     
-    private void ChangeTurn()
+    private void ChangeTurn()// so termino el turno del player
     {
         if (currentTurn == Turn.Player)
         {
