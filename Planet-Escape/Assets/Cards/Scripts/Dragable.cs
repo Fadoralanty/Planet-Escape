@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
 {
+    public bool isInHandZone;
+    public Action OnEndDragAction;
     [SerializeField] private float moveBackToHandTime = 2f;
     [SerializeField] private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
@@ -33,6 +35,10 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
         StartCoroutine(MoveBackToHand(moveBackToHandTime));
         _canvasGroup.alpha = 1;
         _canvasGroup.blocksRaycasts = true;
+        if (!isInHandZone)
+        {
+            OnEndDragAction?.Invoke();
+        }
 
     }
     public void SetLastTransform(Vector2 newPos, Quaternion newRot)

@@ -13,4 +13,15 @@ MonoBehaviour:
   m_Name: Example
   m_EditorClassIdentifier: 
   enemyName: Example
-  maxHealth: 25
+  maxHealth: 50
+  moneyDrop: 0
+  EnemyActionsList:
+  - actionType: 0
+    amount: 6
+    Repetitions: 0
+  - actionType: 0
+    amount: 12
+    Repetitions: 0
+  - actionType: 1
+    amount: 12
+    Repetitions: 0
