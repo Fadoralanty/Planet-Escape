@@ -6,7 +6,6 @@ using UnityEngine;
 public class Player : Character
 {
     public PlayerSO playerStats;
-    public Damageable Damageable => _damageable;
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();

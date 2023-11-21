@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    public Action<float> OnTakeDamage { get; set; }
+    public Action<float,float> OnTakeDamage { get; set; }
     public Action OnDie { get; set; }
     public float MaxLife => maxLife;
     [SerializeField] private float maxLife = 100;
     [SerializeField] private float _currentLife;
     [SerializeField] private float _currentBlock;
-
+    
     public void SetData(float maxHealth)
     {
         maxLife = maxHealth;
@@ -24,13 +24,16 @@ public class Damageable : MonoBehaviour
     {
         if (IsAlive())
         {
+            
+            _currentBlock -= damage;
+            //trigger current block chjange event
             if (_currentBlock > 0)
             {
-                _currentBlock -= damage;
+                return;
             }
-            
+            damage = - _currentBlock;
             _currentLife -= damage;
-            OnTakeDamage?.Invoke(_currentLife);
+            OnTakeDamage?.Invoke(_currentLife, damage);
             
         }
         else

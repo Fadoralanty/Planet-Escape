@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class EnemyDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler,IPointerExitHandler
 {
-    [SerializeField] private Damageable enemyDamageable;
+    [SerializeField] private Enemy enemy;
     
     public void OnDrop(PointerEventData eventData)
     {
@@ -14,7 +14,7 @@ public class EnemyDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler,I
         //Debug.Log(card.CardSo.CardName + " was dropped on " + gameObject.name);
         if (card.CardSo.targetType == TargetType.SingleEnemy)
         {
-            BattleManager.Singleton.SelectedEnemy = enemyDamageable;
+            BattleManager.Singleton.SelectedEnemy = enemy;
             BattleManager.Singleton.PlayCard(card);
         }
     }
