@@ -4,11 +4,14 @@ using UnityEngine;
 public enum CardType{Attack,Skill,Item}
 public enum TargetType{Self,SingleEnemy,AllEnemies,RandomEnemy}
 
-public enum CardActionType
+public enum ActionType
 {
     DealDamage,
     GainBlock,
-    DrawCards
+    DrawCards,
+    Heal,
+    ApplyBuff,
+    
 }
 [CreateAssetMenu(fileName = "New Card")]
 public class Card_SO : ScriptableObject
@@ -23,7 +26,7 @@ public class Card_SO : ScriptableObject
     [System.Serializable]
     public struct CardAction
     {
-        public CardActionType actionType;
+        public ActionType actionType;
         public int amount;
         public int Repetitions;
         

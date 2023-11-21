@@ -33,8 +33,8 @@ public class BattleManager : MonoBehaviour
     public Animator TurnBannerAnimator;
     [Header("Enemies")] 
     public List<GameObject> PossibleEnemies;
-    public List<Damageable> CurrentEnemies;
-    public Damageable SelectedEnemy;
+    public List<Enemy> CurrentEnemies;
+    public Enemy SelectedEnemy;
     
     private Random random = new Random();
     private void Awake()
@@ -59,6 +59,11 @@ public class BattleManager : MonoBehaviour
     {
         //int enemiesToSpawn = 1;
         //InstantiateEnemies(enemiesToSpawn);
+        foreach (var enemy in CurrentEnemies)
+        {
+            enemy.Target = Player;
+        }
+        ShowEnemiesIntents();
         
         discardPile.Clear();
         drawPile.Clear();
@@ -74,10 +79,11 @@ public class BattleManager : MonoBehaviour
     }
     private void InstantiateEnemies(int amount)
     {
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject newEnemy = Instantiate(PossibleEnemies[UnityEngine.Random.Range(0, PossibleEnemies.Count)]);
-        }
+        
+        // for (int i = 0; i < amount; i++)
+        // {
+        //     GameObject newEnemy = Instantiate(PossibleEnemies[UnityEngine.Random.Range(0, PossibleEnemies.Count)]);
+        // }
     }
 
     private void ShuffleDeck()
@@ -120,6 +126,7 @@ public class BattleManager : MonoBehaviour
             discardPile.Add(card);
         }
         cardsInHand.Clear();
+        discardPileText.text = discardPile.Count.ToString();
     }
 
     public void DiscardCard(Card_SO card)
@@ -143,7 +150,6 @@ public class BattleManager : MonoBehaviour
         Hand.UpdateHand();
         
         discardPile.Add(card.CardSo);
-        //update discard pile counter TMpro
         discardPileText.text = discardPile.Count.ToString();
 
     }
@@ -155,7 +161,7 @@ public class BattleManager : MonoBehaviour
             switch (targetType)
             {
                 case TargetType.Self:
-                    ActionHandler.DoActionSingle(cardAction, Player.Damageable);
+                    ActionHandler.DoActionSingle(cardAction, Player);
                     break;
                 case TargetType.SingleEnemy:
                     ActionHandler.DoActionSingle(cardAction, SelectedEnemy);
@@ -177,36 +183,68 @@ public class BattleManager : MonoBehaviour
     
     private void ChangeTurn()
     {
-        if (currentTurn == Turn.Player)
+        if (currentTurn == Turn.Player)// si termino el turno del player
         {
             currentTurn = Turn.Enemy;
             EndturnButton.enabled = false;
             
             DiscardHand();
             
-            TurnBannerAnimator.Play("EnemyTurn");
-            // REset enemy block
+            
+            foreach (var enemy in CurrentEnemies)
+            {
+                enemy.Damageable.RemoveBlock();
+            }
             
             //Show That its the enemy turn
+            TurnBannerAnimator.Play("EnemyTurn");
             
             //make all enemies do their action
-            
-            
+            StartCoroutine(ExecuteEnemyTurn());
         }
-        else if(currentTurn == Turn.Enemy)
+        else if(currentTurn == Turn.Enemy)// si termino el turno de los enemigos
         {
             //display enemy intent
+            ShowEnemiesIntents();
+            
             currentTurn = Turn.Player;
             TurnBannerAnimator.Play("PlayerTurn");
             EndturnButton.enabled = true;
+            
             //reset player block
+            Player.Damageable.RemoveBlock();
+            
             CurrentEnergy = MaxEnergy;
-            //show energy
+            EnergyText.text = CurrentEnergy.ToString();
+            
             DrawCards(CardsDrawnPerTurn);
+            Hand.UpdateHand();
         }
         
     }
-    
+
+    IEnumerator ExecuteEnemyTurn()
+    {
+        yield return new WaitForSeconds(1f);
+        foreach (var enemy in CurrentEnemies)
+        {
+            enemy.isMidTurn = true;
+            enemy.TakeTurn();
+            while (enemy.isMidTurn)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        ChangeTurn();
+    }
+
+    private void ShowEnemiesIntents()
+    {
+        foreach (var enemy in CurrentEnemies)
+        {
+            enemy.ShowIntent();
+        }
+    }
     private void EndTurn()
     {
         ChangeTurn();

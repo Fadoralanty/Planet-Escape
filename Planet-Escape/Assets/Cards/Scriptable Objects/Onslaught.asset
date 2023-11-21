@@ -9,19 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6250b89fc263ed4eadd28cd81b74845, type: 3}
-  m_Name: Example
+  m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
+  m_Name: Onslaught
   m_EditorClassIdentifier: 
-  enemyName: Example
-  maxHealth: 50
-  moneyDrop: 0
-  EnemyActionsList:
+  CardName: Onslaught
+  CardDescription: Deals 27 Damage
+  CardCost: 3
+  CardType: 0
+  CardIcon: {fileID: 0}
+  _cardActions:
   - actionType: 0
-    amount: 6
+    amount: 27
     Repetitions: 0
-  - actionType: 0
-    amount: 12
-    Repetitions: 0
-  - actionType: 1
-    amount: 12
-    Repetitions: 0
+  targetType: 1
