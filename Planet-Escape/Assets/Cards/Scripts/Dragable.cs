@@ -30,16 +30,21 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
     
     public void OnEndDrag(PointerEventData eventData)
     {
-        //_rectTransform.anchoredPosition = _lastPosition;
         _rectTransform.rotation = _lastRotation;
         StartCoroutine(MoveBackToHand(moveBackToHandTime));
-        _canvasGroup.alpha = 1;
-        _canvasGroup.blocksRaycasts = true;
+        ResetCanvasGroup();
         if (!isInHandZone)
         {
+            _rectTransform.position = _lastPosition;
             OnEndDragAction?.Invoke();
         }
 
+    }
+
+    public void ResetCanvasGroup()
+    {
+        _canvasGroup.alpha = 1;
+        _canvasGroup.blocksRaycasts = true;
     }
     public void SetLastTransform(Vector2 newPos, Quaternion newRot)
     {
