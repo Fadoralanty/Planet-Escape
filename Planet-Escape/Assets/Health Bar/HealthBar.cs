@@ -41,7 +41,7 @@ public class HealthBar : MonoBehaviour
     {
         Fill2ndHealthbar();
     }
-    public void FillHealthbar(float currentlife)
+    public void FillHealthbar(float currentlife, float damage) 
     {
         _healthBar.fillAmount = currentlife/_damageable.MaxLife;
         _loseHealthSpeed = _loseHPSpeedNormal;

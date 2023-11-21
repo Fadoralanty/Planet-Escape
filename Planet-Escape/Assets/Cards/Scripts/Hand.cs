@@ -45,7 +45,10 @@ public class Hand : MonoBehaviour
         foreach (var cardUI in activeCards)
         {
             InactiveCards.Add(cardUI);
+            cardUI.RectTransform.localPosition = Vector3.zero;
+            cardUI.transform.rotation = quaternion.Euler(Vector3.zero);
             cardUI.gameObject.SetActive(false);
+            cardUI.transform.SetSiblingIndex(10);
         }
         activeCards.Clear();
     }
@@ -56,15 +59,15 @@ public class Hand : MonoBehaviour
         {
             card.RectTransform.localPosition = Vector3.zero;
             card.transform.rotation = quaternion.Euler(Vector3.zero);
+            card.Dragable.ResetCanvasGroup();
         }
     }
     public void UpdateHand()
     {
         ResetCardsTransform();
-        _proportion = activeCards.Count / 10f;
-        SetCardsSpacing();
-        SetCardsHeight();
-        RotateCards();
+        
+        FanCards();
+        
         foreach (var card in activeCards)
         {
             Vector2 newPosition = card.RectTransform.anchoredPosition;
@@ -75,6 +78,14 @@ public class Hand : MonoBehaviour
             
             card.border.gameObject.SetActive(card.CanBePlayed());
         }
+    }
+
+    private void FanCards()
+    {
+        _proportion = activeCards.Count / 10f;
+        SetCardsSpacing();
+        SetCardsHeight();
+        RotateCards();
     }
     private void RotateCards()
     {

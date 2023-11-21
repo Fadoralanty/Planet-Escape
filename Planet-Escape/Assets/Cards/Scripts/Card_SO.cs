@@ -8,7 +8,10 @@ public enum ActionType
 {
     DealDamage,
     GainBlock,
-    DrawCards
+    DrawCards,
+    Heal,
+    ApplyBuff,
+    
 }
 [CreateAssetMenu(fileName = "New Card")]
 public class Card_SO : ScriptableObject

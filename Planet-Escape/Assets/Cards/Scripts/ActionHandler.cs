@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class ActionHandler : MonoBehaviour
 {
-    public void DoActionMultiple(Card_SO.CardAction action, List<Damageable> targets)
+    public void DoActionMultiple(Card_SO.CardAction action, List<Enemy> targets)
     {
         foreach (var target in targets)
         {
             DoActionSingle(action, target);
         }
     }
-    public void DoActionSingle(Card_SO.CardAction action, Damageable target)
+    public void DoActionSingle(Card_SO.CardAction action, Character target)
     {
         switch (action.actionType)
         {
             case ActionType.DealDamage:
-                DealDamage(action.amount, target);
+                DealDamage(action.amount, target.Damageable);
                 break;
             case ActionType.GainBlock:
-                GainBlock(action.amount, target);
+                GainBlock(action.amount, target.Damageable);
                 break;
             case ActionType.DrawCards:
                 BattleManager.Singleton.DrawCards(action.amount);

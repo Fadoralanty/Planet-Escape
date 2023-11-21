@@ -7,13 +7,14 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
+    public Character Target;
+    public bool isMidTurn;
     [SerializeField] private EnemySO _enemySo;
     [Header("UI")]
     [SerializeField] private Image enemySprite;
     [SerializeField] private Image intentImage;
     [SerializeField] private TextMeshProUGUI intentNum;
     private int _actionIndex;
-    public Damageable Damageable => _damageable;
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
@@ -28,7 +29,7 @@ public class Enemy : Character
         switch (_enemySo.EnemyActionsList[_actionIndex].actionType)
         {
             case ActionType.DealDamage:
-                StartCoroutine(AttackPlayer());
+                StartCoroutine(AttackPlayer(_enemySo.EnemyActionsList[_actionIndex]));
                 break;
             case ActionType.GainBlock:
                 GainBlock(_enemySo.EnemyActionsList[_actionIndex].amount);
@@ -36,24 +37,36 @@ public class Enemy : Character
         }
     }
 
-    IEnumerator AttackPlayer()
+    IEnumerator AttackPlayer(EnemySO.EnemyActions enemyAction)
     {
         //play attack animation
         
         yield return new WaitForSeconds(0.5f);
         //deal damage
-        
+        Target.Damageable.TakeDamage(enemyAction.amount);
         yield return new WaitForSeconds(0.5f);
-        _actionIndex += 1;
-        if (_actionIndex>_enemySo.EnemyActionsList.Count) { _actionIndex = 0; }
         
+        EndTurn();
+
     }
     
     private void GainBlock(int block)
     {
         _damageable.GainBlock(block);
         //display block
+        EndTurn();
+    }
+
+    private void EndTurn()
+    {
         _actionIndex += 1;
-        if (_actionIndex>_enemySo.EnemyActionsList.Count) { _actionIndex = 0; }
+        if (_actionIndex >= _enemySo.EnemyActionsList.Count) { _actionIndex = 0; }
+
+        isMidTurn = false;
+    }
+
+    public void ShowIntent()
+    {
+        intentNum.text = _enemySo.EnemyActionsList[_actionIndex].amount.ToString();
     }
 }
