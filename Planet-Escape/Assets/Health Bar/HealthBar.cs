@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    [Header("Text")] [SerializeField] private TextMeshProUGUI TMP;
     [Header("Main HealthBar")]
     [SerializeField] private Image _healthBar;
     [SerializeField] private Color _healthBarColor = new Color(1, 0, 0, 1);
@@ -45,6 +47,7 @@ public class HealthBar : MonoBehaviour
     {
         _healthBar.fillAmount = currentlife/_damageable.MaxLife;
         _loseHealthSpeed = _loseHPSpeedNormal;
+        TMP.text = currentlife + " / " + _damageable.MaxLife;
     }   
     public void Fill2ndHealthbar()
     {
