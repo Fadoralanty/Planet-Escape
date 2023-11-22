@@ -15,6 +15,7 @@ public class Damageable : MonoBehaviour
     {
         maxLife = maxHealth;
         SetCurrentLife(maxHealth);
+        OnTakeDamage?.Invoke(_currentLife, 0);
     }
     
     public bool IsAlive() => _currentLife > 0;
@@ -25,13 +26,20 @@ public class Damageable : MonoBehaviour
         if (IsAlive())
         {
             
-            _currentBlock -= damage;
             //trigger current block chjange event
             if (_currentBlock > 0)
             {
-                return;
+                _currentBlock -= damage;
+                if (_currentBlock > 0)
+                {
+                    OnTakeDamage?.Invoke(_currentLife , 0);
+                    return;
+                }
+                else
+                {
+                    damage = - _currentBlock;
+                }
             }
-            damage = - _currentBlock;
             _currentLife -= damage;
             OnTakeDamage?.Invoke(_currentLife, damage);
             
