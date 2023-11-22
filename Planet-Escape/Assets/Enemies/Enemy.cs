@@ -11,6 +11,7 @@ public class Enemy : Character
     public bool isMidTurn;
     [SerializeField] private EnemySO _enemySo;
     [Header("UI")]
+    [SerializeField] private IntentIconsSO intentIconsSo;
     [SerializeField] private Image enemySprite;
     [SerializeField] private Image intentImage;
     [SerializeField] private TextMeshProUGUI intentNum;
@@ -68,5 +69,14 @@ public class Enemy : Character
     public void ShowIntent()
     {
         intentNum.text = _enemySo.EnemyActionsList[_actionIndex].amount.ToString();
+        switch (_enemySo.EnemyActionsList[_actionIndex].actionType)
+        {
+            case ActionType.DealDamage:
+                intentImage.sprite = intentIconsSo.AttackIcon;
+                break;
+            case ActionType.GainBlock:
+                intentImage.sprite = intentIconsSo.BlockIcon;
+                break;
+        }
     }
 }
