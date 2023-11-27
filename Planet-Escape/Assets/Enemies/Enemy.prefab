@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 5973421104271845927}
   - component: {fileID: 5973421104271845924}
   - component: {fileID: 2120088750}
+  - component: {fileID: 7027711623733869795}
   m_Layer: 5
   m_Name: Enemy
   m_TagString: Untagged
@@ -411,6 +412,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7027711623733869795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973421104271845921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab256ac93846e748b89d98648154639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemies:
+  - {fileID: 5973421104271845924}
 --- !u!1 &5973421104419604767
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,8 +998,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.2508, y: -25.368114}
-  m_SizeDelta: {x: 459.7212, y: 499.2838}
+  m_AnchoredPosition: {x: 1.2508, y: 0.46312}
+  m_SizeDelta: {x: 459.7212, y: 550.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5973421106020383926
 CanvasRenderer:
