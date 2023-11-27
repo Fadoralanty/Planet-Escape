@@ -17,7 +17,12 @@ public class Damageable : MonoBehaviour
         SetCurrentLife(maxHealth);
         OnTakeDamage?.Invoke(_currentLife, 0);
     }
-    
+
+    private void Start()
+    {
+        OnTakeDamage?.Invoke(_currentLife, 0);
+    }
+
     public bool IsAlive() => _currentLife > 0;
     public void SetCurrentLife(float life) => _currentLife = life;
     public void SetMaxLife(float life) => maxLife = life;

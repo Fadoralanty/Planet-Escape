@@ -22,7 +22,7 @@ public class Enemy : Character
         _damageable.SetData(_enemySo.MaxHealth);
         _actionIndex = 0;
     }
-
+    
     public void TakeTurn()
     {
         //hide intent

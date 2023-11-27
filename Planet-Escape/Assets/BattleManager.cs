@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Map;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +32,9 @@ public class BattleManager : MonoBehaviour
     public Button EndturnButton;
     public Animator TurnBannerAnimator;
     [Header("Enemies")] 
-    public List<GameObject> PossibleEnemies;
+    public List<Encounter> PossibleMinorEnemies;
+    public List<Encounter> PossibleEnemies;
+    public List<Encounter> PossibleEliteEnemies;
     public List<Enemy> CurrentEnemies;
     public Enemy SelectedEnemy;
     
@@ -56,8 +59,8 @@ public class BattleManager : MonoBehaviour
 
     private void BeginCombat()
     {
-        //int enemiesToSpawn = 1;
-        //InstantiateEnemies(enemiesToSpawn);
+        InstantiateEnemies();
+        
         foreach (var enemy in CurrentEnemies)
         {
             enemy.Target = Player;
@@ -76,13 +79,26 @@ public class BattleManager : MonoBehaviour
         //update energy UI
         TurnBannerAnimator.Play("PlayerTurn");
     }
-    private void InstantiateEnemies(int amount)
+    private void InstantiateEnemies()
     {
-        
-        // for (int i = 0; i < amount; i++)
-        // {
-        //     GameObject newEnemy = Instantiate(PossibleEnemies[UnityEngine.Random.Range(0, PossibleEnemies.Count)]);
-        // }
+        switch (GameManager.Singleton.CurrentNodeType)
+        {
+            case NodeType.MinorEnemy:
+                int rnd = random.Next(PossibleMinorEnemies.Count);
+                Encounter encounter = Instantiate(PossibleMinorEnemies[rnd], transform.parent).GetComponent<Encounter>();
+                encounter.transform.SetSiblingIndex(1);
+                foreach (var enemy in encounter.Enemies)
+                {
+                    CurrentEnemies.Add(enemy);
+                }
+                break;
+            case NodeType.EliteEnemy:
+                break;
+            case NodeType.Boss:
+                break;
+            case NodeType.Mystery:
+                break;
+        }
     }
 
     private void ShuffleDeck()
