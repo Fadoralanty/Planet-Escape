@@ -21,4 +21,4 @@ MonoBehaviour:
   - actionType: 1
     amount: 5
     Repetitions: 0
-    targetType: 0
+  targetType: 0
