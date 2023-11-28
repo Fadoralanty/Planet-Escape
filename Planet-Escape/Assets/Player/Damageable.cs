@@ -28,26 +28,24 @@ public class Damageable : MonoBehaviour
     public void SetMaxLife(float life) => maxLife = life;
     public void TakeDamage(float damage)
     {
-        if (IsAlive())
-        {
-            
             //trigger current block chjange event
+        if (_currentBlock > 0)
+        {
+            _currentBlock -= damage;
             if (_currentBlock > 0)
             {
-                _currentBlock -= damage;
-                if (_currentBlock > 0)
-                {
-                    OnTakeDamage?.Invoke(_currentLife , 0);
-                    return;
-                }
-                else
-                {
-                    damage = - _currentBlock;
-                }
+                OnTakeDamage?.Invoke(_currentLife , 0);
+                return;
             }
-            _currentLife -= damage;
+            else
+            {
+                damage = - _currentBlock;
+            }
+        }
+        _currentLife -= damage;
+        if (IsAlive())
+        {
             OnTakeDamage?.Invoke(_currentLife, damage);
-            
         }
         else
         {
