@@ -27,6 +27,10 @@ public class BattleManager : MonoBehaviour
     public int CurrentEnergy;
     public TextMeshProUGUI EnergyText;
     public enum Turn {Player,Enemy};
+
+    [Header("Victory & Defeat")] 
+    public GameObject GameOverScreen;
+
     [Header("Turns")]
     public Turn currentTurn;
     public Button EndturnButton;
@@ -54,6 +58,8 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         EndturnButton.onClick.AddListener(EndTurn);
+        Player.Damageable.OnDie += Defeat;
+        GameOverScreen.SetActive(false);
         BeginCombat();
     }
 
@@ -191,9 +197,13 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    private void EndCombat()
+    private void Victory()
     {
-        //instantiate enemies
+        
+    }    
+    private void Defeat()
+    {
+        GameOverScreen.SetActive(true);
     }
     
     private void ChangeTurn()
@@ -264,5 +274,9 @@ public class BattleManager : MonoBehaviour
     {
         ChangeTurn();
     }
-    
+
+    private void OnDestroy()
+    {
+        Player.Damageable.OnDie -= Defeat;
+    }
 }
