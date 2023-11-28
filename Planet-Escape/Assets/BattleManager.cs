@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Map;
 using TMPro;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -27,12 +27,18 @@ public class BattleManager : MonoBehaviour
     public int CurrentEnergy;
     public TextMeshProUGUI EnergyText;
     public enum Turn {Player,Enemy};
+
+    [Header("Victory & Defeat")] 
+    public GameObject GameOverScreen;
+
     [Header("Turns")]
     public Turn currentTurn;
     public Button EndturnButton;
     public Animator TurnBannerAnimator;
     [Header("Enemies")] 
-    public List<GameObject> PossibleEnemies;
+    public List<Encounter> PossibleMinorEnemies;
+    public List<Encounter> PossibleEnemies;
+    public List<Encounter> PossibleEliteEnemies;
     public List<Enemy> CurrentEnemies;
     public Enemy SelectedEnemy;
     
@@ -52,13 +58,15 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         EndturnButton.onClick.AddListener(EndTurn);
+        Player.Damageable.OnDie += Defeat;
+        GameOverScreen.SetActive(false);
         BeginCombat();
     }
 
     private void BeginCombat()
     {
-        //int enemiesToSpawn = 1;
-        //InstantiateEnemies(enemiesToSpawn);
+        InstantiateEnemies();
+        
         foreach (var enemy in CurrentEnemies)
         {
             enemy.Target = Player;
@@ -77,13 +85,26 @@ public class BattleManager : MonoBehaviour
         //update energy UI
         TurnBannerAnimator.Play("PlayerTurn");
     }
-    private void InstantiateEnemies(int amount)
+    private void InstantiateEnemies()
     {
-        
-        // for (int i = 0; i < amount; i++)
-        // {
-        //     GameObject newEnemy = Instantiate(PossibleEnemies[UnityEngine.Random.Range(0, PossibleEnemies.Count)]);
-        // }
+        switch (GameManager.Singleton.CurrentNodeType)
+        {
+            case NodeType.MinorEnemy:
+                int rnd = random.Next(PossibleMinorEnemies.Count);
+                Encounter encounter = Instantiate(PossibleMinorEnemies[rnd], transform.parent).GetComponent<Encounter>();
+                encounter.transform.SetSiblingIndex(1);
+                foreach (var enemy in encounter.Enemies)
+                {
+                    CurrentEnemies.Add(enemy);
+                }
+                break;
+            case NodeType.EliteEnemy:
+                break;
+            case NodeType.Boss:
+                break;
+            case NodeType.Mystery:
+                break;
+        }
     }
 
     private void ShuffleDeck()
@@ -176,9 +197,13 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    private void EndCombat()
+    private void Victory()
     {
-        //instantiate enemies
+        
+    }    
+    private void Defeat()
+    {
+        GameOverScreen.SetActive(true);
     }
     
     private void ChangeTurn()
@@ -249,5 +274,9 @@ public class BattleManager : MonoBehaviour
     {
         ChangeTurn();
     }
-    
+
+    private void OnDestroy()
+    {
+        Player.Damageable.OnDie -= Defeat;
+    }
 }

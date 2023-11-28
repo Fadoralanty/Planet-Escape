@@ -17,32 +17,35 @@ public class Damageable : MonoBehaviour
         SetCurrentLife(maxHealth);
         OnTakeDamage?.Invoke(_currentLife, 0);
     }
-    
+
+    private void Start()
+    {
+        OnTakeDamage?.Invoke(_currentLife, 0);
+    }
+
     public bool IsAlive() => _currentLife > 0;
     public void SetCurrentLife(float life) => _currentLife = life;
     public void SetMaxLife(float life) => maxLife = life;
     public void TakeDamage(float damage)
     {
-        if (IsAlive())
-        {
-            
             //trigger current block chjange event
+        if (_currentBlock > 0)
+        {
+            _currentBlock -= damage;
             if (_currentBlock > 0)
             {
-                _currentBlock -= damage;
-                if (_currentBlock > 0)
-                {
-                    OnTakeDamage?.Invoke(_currentLife , 0);
-                    return;
-                }
-                else
-                {
-                    damage = - _currentBlock;
-                }
+                OnTakeDamage?.Invoke(_currentLife , 0);
+                return;
             }
-            _currentLife -= damage;
+            else
+            {
+                damage = - _currentBlock;
+            }
+        }
+        _currentLife -= damage;
+        if (IsAlive())
+        {
             OnTakeDamage?.Invoke(_currentLife, damage);
-            
         }
         else
         {
