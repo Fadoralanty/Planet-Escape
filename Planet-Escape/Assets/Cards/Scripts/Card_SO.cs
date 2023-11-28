@@ -17,6 +17,7 @@ public enum ActionType
 public class Card_SO : ScriptableObject
 {
     public string CardName;
+    [TextArea(2,5)]
     public string CardDescription;
     public int CardCost;
     public CardType CardType;

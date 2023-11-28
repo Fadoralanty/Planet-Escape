@@ -31,6 +31,7 @@ public class BattleManager : MonoBehaviour
     [Header("Victory & Defeat")] 
     public GameObject GameOverScreen;
 
+    public ChooseACard ChooseACard;
     [Header("Turns")]
     public Turn currentTurn;
     public Button EndturnButton;
@@ -194,12 +195,13 @@ public class BattleManager : MonoBehaviour
                     int rndIndex = random.Next(CurrentEnemies.Count);
                     ActionHandler.DoActionSingle(cardAction, CurrentEnemies[rndIndex]);
                     break;
+
             }
         }
     }
     private void Victory()
     {
-        
+        ChooseACard.gameObject.SetActive(true);
     }    
     private void Defeat()
     {
