@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
   m_Name: Greanade
   m_EditorClassIdentifier: 
-  CardName: Medkit
+  CardName: Greanade
   CardDescription: 'Deals 25 Daamge
 
     Consume'

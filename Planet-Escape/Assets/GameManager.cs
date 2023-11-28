@@ -28,4 +28,9 @@ public class GameManager : MonoBehaviour
         IsNewGame = true;
         SceneManager.LoadScene("Map");
     }
+
+    public void GoBackToMapScreen()
+    {
+        SceneManager.LoadScene("Map");
+    }
 }
