@@ -194,6 +194,7 @@ public class BattleManager : MonoBehaviour
                     int rndIndex = random.Next(CurrentEnemies.Count);
                     ActionHandler.DoActionSingle(cardAction, CurrentEnemies[rndIndex]);
                     break;
+
             }
         }
     }
