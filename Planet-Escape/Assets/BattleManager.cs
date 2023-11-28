@@ -31,6 +31,7 @@ public class BattleManager : MonoBehaviour
     [Header("Victory & Defeat")] 
     public GameObject GameOverScreen;
 
+    public ChooseACard ChooseACard;
     [Header("Turns")]
     public Turn currentTurn;
     public Button EndturnButton;
@@ -200,7 +201,7 @@ public class BattleManager : MonoBehaviour
     }
     private void Victory()
     {
-        
+        ChooseACard.gameObject.SetActive(true);
     }    
     private void Defeat()
     {
