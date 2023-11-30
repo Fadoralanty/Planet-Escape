@@ -56,5 +56,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
   - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
   - {fileID: 11400000, guid: e82c9c09e7674db4eb34478d7862a411, type: 2}
+  PlayerSo: {fileID: 11400000, guid: 685358f1cb92f9b48a0da3f0fc61609b, type: 2}
   playerHealth: 0
+  playerMaxHealth: 0
   CurrentNodeType: 0
+  IsNewGame: 0
