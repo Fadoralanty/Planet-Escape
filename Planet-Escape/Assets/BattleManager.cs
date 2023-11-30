@@ -41,6 +41,7 @@ public class BattleManager : MonoBehaviour
     public List<Encounter> PossibleEnemies;
     public List<Encounter> PossibleEliteEnemies;
     public List<Enemy> CurrentEnemies;
+    public List<Enemy> allEnemies;
     public Enemy SelectedEnemy;
     
     private Random random = new Random();
@@ -97,6 +98,8 @@ public class BattleManager : MonoBehaviour
                 foreach (var enemy in encounter.Enemies)
                 {
                     CurrentEnemies.Add(enemy);
+                    allEnemies.Add(enemy);
+                    enemy.Damageable.OnDie += OnEnemyDie;
                 }
                 break;
             case NodeType.EliteEnemy:
@@ -107,6 +110,7 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
+    
 
     private void ShuffleDeck()
     {
@@ -272,6 +276,15 @@ public class BattleManager : MonoBehaviour
             enemy.ShowIntent();
         }
     }
+
+    private void OnEnemyDie()
+    {
+        if (CurrentEnemies.Count == 0)
+        {
+            Victory();   
+        }
+    }
+
     private void EndTurn()
     {
         ChangeTurn();
@@ -280,5 +293,9 @@ public class BattleManager : MonoBehaviour
     private void OnDestroy()
     {
         Player.Damageable.OnDie -= Defeat;
+        foreach (var enemy in allEnemies)
+        {
+            enemy.Damageable.OnDie -= OnEnemyDie;
+        }
     }
 }

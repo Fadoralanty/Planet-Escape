@@ -21,8 +21,15 @@ public class Enemy : Character
         _damageable = GetComponent<Damageable>();
         _damageable.SetData(_enemySo.MaxHealth);
         _actionIndex = 0;
+        _damageable.OnDie += OnDieHandler;
     }
-    
+
+    private void OnDieHandler()
+    {
+        BattleManager.Singleton.CurrentEnemies.Remove(this);
+        gameObject.SetActive(false);
+    }
+
     public void TakeTurn()
     {
         //hide intent
@@ -78,5 +85,11 @@ public class Enemy : Character
                 intentImage.sprite = intentIconsSo.BlockIcon;
                 break;
         }
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _damageable.OnDie -= OnDieHandler;
     }
 }
