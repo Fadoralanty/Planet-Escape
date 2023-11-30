@@ -43,14 +43,10 @@ public class Damageable : MonoBehaviour
             }
         }
         _currentLife -= damage;
-        if (IsAlive())
-        {
-            OnTakeDamage?.Invoke(_currentLife, damage);
-        }
-        else
+        OnTakeDamage?.Invoke(_currentLife, damage);
+        if (!IsAlive())
         {
             OnDie?.Invoke();
-            Die();
         }
     }
 
@@ -63,12 +59,7 @@ public class Damageable : MonoBehaviour
     {
         _currentBlock = 0;
     }
-    public void Die()
-    {
-        //Destroy(gameObject, 3f);
-        gameObject.SetActive(false);
-    }
-    
+
     private void OnDestroy()
     {
         Dispose();

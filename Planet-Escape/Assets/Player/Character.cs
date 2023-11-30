@@ -17,7 +17,7 @@ public abstract class Character : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnTakeDamageHandler(float currLife, float damage)
+    protected virtual void OnTakeDamageHandler(float currLife, float damage)
     {
         DamageIndicatorTMP.text = damage.ToString();
         _animator.Play("DamageIndicator");
@@ -60,7 +60,7 @@ public abstract class Character : MonoBehaviour
         
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         _damageable.OnTakeDamage -= OnTakeDamageHandler;
     }
