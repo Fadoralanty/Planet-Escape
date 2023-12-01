@@ -12,6 +12,8 @@ public class HealthBar : MonoBehaviour
     [Header("Main HealthBar")]
     [SerializeField] private Image _healthBar;
     [SerializeField] private Color _healthBarColor = new Color(1, 0, 0, 1);
+    [Header("BLock bar")] 
+    [SerializeField] private GameObject blockHealthBar;
 
     [Header("Sub HealhBar")]
     [SerializeField] private Image _healthBarDelay;
@@ -30,7 +32,21 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         _damageable.OnTakeDamage += FillHealthbar;
+        _damageable.OnBlockChange += ShowBlueHealthBar;
         InitHealthBarColor();
+    }
+
+    private void ShowBlueHealthBar(float block)
+    {
+        if (block <= 0)
+        {
+            blockHealthBar.SetActive(false);
+        }
+        else
+        {
+            blockHealthBar.SetActive(true);
+            TMP.text = _damageable.CurrentLife + " / " + _damageable.MaxLife + " + " + block;
+        }
     }
 
     private void InitHealthBarColor()
@@ -47,7 +63,8 @@ public class HealthBar : MonoBehaviour
     {
         _healthBar.fillAmount = currentlife/_damageable.MaxLife;
         _loseHealthSpeed = _loseHPSpeedNormal;
-        TMP.text = currentlife + " / " + _damageable.MaxLife;
+        TMP.text = _damageable.CurrentLife + " / " + _damageable.MaxLife;
+        ShowBlueHealthBar(_damageable.CurrentBlock);
     }   
     public void Fill2ndHealthbar()
     {
@@ -65,4 +82,9 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        _damageable.OnTakeDamage -= FillHealthbar;
+        _damageable.OnBlockChange -= ShowBlueHealthBar;
+    }
 }

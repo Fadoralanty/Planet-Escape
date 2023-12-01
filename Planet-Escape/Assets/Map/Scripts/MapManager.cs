@@ -34,6 +34,12 @@ namespace Map
             {
                 GenerateNewMap();
             }
+            
+            if (GameManager.Singleton.IsNewGame)
+            {
+                GameManager.Singleton.IsNewGame = false;
+                GenerateNewMap();
+            }
         }
 
         public void GenerateNewMap()

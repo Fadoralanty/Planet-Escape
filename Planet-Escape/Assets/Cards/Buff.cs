@@ -12,5 +12,5 @@ public class Buff
 public enum BuffType
 {
     Regeneration,
-    
+    poison
 }
