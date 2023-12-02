@@ -10,17 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
-  m_Name: Greanade
+  m_Name: Medkit
   m_EditorClassIdentifier: 
-  CardName: Greanade
-  CardDescription: 'Deals 25 Daamge
+  CardName: Medkit
+  CardDescription: 'Heal 20 HP,
 
-    Consume'
-  CardCost: 0
+    CONSUME'
+  CardCost: 2
   CardType: 2
   CardIcon: {fileID: 0}
   _cardActions:
-  - actionType: 0
-    amount: 25
+  - actionType: 3
+    amount: 20
     Repetitions: 0
-  targetType: 1
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  targetType: 0

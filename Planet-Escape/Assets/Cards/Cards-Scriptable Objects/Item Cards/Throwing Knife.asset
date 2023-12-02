@@ -10,17 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
-  m_Name: Medkit
+  m_Name: Throwing Knife
   m_EditorClassIdentifier: 
-  CardName: Medkit
-  CardDescription: 'Heal 20 HP,
+  CardName: Throwing Knife
+  CardDescription: 'Deals 12 Daamge
 
-    CONSUME'
-  CardCost: 0
+    Consume'
+  CardCost: 1
   CardType: 2
   CardIcon: {fileID: 0}
   _cardActions:
-  - actionType: 3
-    amount: 20
+  - actionType: 0
+    amount: 12
     Repetitions: 0
-  targetType: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  targetType: 1

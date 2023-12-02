@@ -6834,6 +6834,7 @@ MonoBehaviour:
   - {fileID: 1724372364}
   - {fileID: 934581431}
   character: {fileID: 1619031147}
+  BuffsIcons: {fileID: 11400000, guid: b8e39f75346199d44954e06569da462c, type: 2}
 --- !u!1001 &2668892923730837526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6848,7 +6849,7 @@ PrefabInstance:
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[10]
       value: 
-      objectReference: {fileID: 11400000, guid: 7a8ebe49679de0a428c1651c15924e06, type: 2}
+      objectReference: {fileID: 11400000, guid: 4c685ad1c6415684fb5b581cf4f207e3, type: 2}
     - target: {fileID: 2668892923723951214, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: m_RootOrder
       value: 2
