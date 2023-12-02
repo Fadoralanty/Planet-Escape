@@ -30,6 +30,6 @@ public class Card_SO : ScriptableObject
         public ActionType actionType;
         public int amount;
         public int Repetitions;
-        
+        public Buff Buff;
     }
 }

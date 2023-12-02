@@ -221,10 +221,12 @@ public class BattleManager : MonoBehaviour
             
             DiscardHand();
             
-            
+            //HandleBuffs
+            Player.UpdateBuffsAtEndOfTurn();
             foreach (var enemy in CurrentEnemies)
             {
                 enemy.Damageable.RemoveBlock();
+                enemy.UpdateBuffsAtBeginningOfTurn();
             }
             
             //Show That its the enemy turn
@@ -237,6 +239,13 @@ public class BattleManager : MonoBehaviour
         {
             //display enemy intent
             ShowEnemiesIntents();
+            //HandleBuffs
+            Player.UpdateBuffsAtBeginningOfTurn();
+            foreach (var enemy in CurrentEnemies)
+            {
+                enemy.UpdateBuffsAtEndOfTurn();
+            }
+            
             
             currentTurn = Turn.Player;
             TurnBannerAnimator.Play("PlayerTurn");

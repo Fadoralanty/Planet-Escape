@@ -34,17 +34,33 @@ public class Enemy : Character
     {
         //hide intent
         //do action
-        switch (_enemySo.EnemyActionsList[_actionIndex].actionType)
+        EnemySO.EnemyActions action = _enemySo.EnemyActionsList[_actionIndex];
+        switch (action.actionType)
         {
             case ActionType.DealDamage:
-                StartCoroutine(AttackPlayer(_enemySo.EnemyActionsList[_actionIndex]));
+                StartCoroutine(AttackPlayer(action));
                 break;
             case ActionType.GainBlock:
-                GainBlock(_enemySo.EnemyActionsList[_actionIndex].amount);
+                GainBlock(action.amount);
+                break;
+            case ActionType.ApplyBuff:
+                ApplyBuff(action.Buff);
                 break;
         }
     }
 
+    private void ApplyBuff(Buff buff)
+    {
+        switch (buff.BuffType)
+        {
+            case BuffType.Regeneration:
+                break;
+            case BuffType.Poison:
+                Target.AddBuff(buff);
+                break;
+        }
+        EndTurn();
+    }
     IEnumerator AttackPlayer(EnemySO.EnemyActions enemyAction)
     {
         //play attack animation
@@ -75,14 +91,25 @@ public class Enemy : Character
 
     public void ShowIntent()
     {
-        intentNum.text = _enemySo.EnemyActionsList[_actionIndex].amount.ToString();
-        switch (_enemySo.EnemyActionsList[_actionIndex].actionType)
+        EnemySO.EnemyActions action = _enemySo.EnemyActionsList[_actionIndex];
+        intentNum.text = action.amount.ToString();
+        switch (action.actionType)
         {
             case ActionType.DealDamage:
                 intentImage.sprite = intentIconsSo.AttackIcon;
                 break;
             case ActionType.GainBlock:
                 intentImage.sprite = intentIconsSo.BlockIcon;
+                break;
+            case ActionType.Heal:
+                break;
+            case ActionType.ApplyBuff:
+                switch (action.Buff.BuffType)
+                {
+                    case BuffType.Poison:
+                        intentImage.sprite = intentIconsSo.PoisonIcon;
+                        break;
+                }
                 break;
         }
     }

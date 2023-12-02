@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 364947108082443889}
   - component: {fileID: 8850701184582412321}
   - component: {fileID: 1825010562498002138}
+  - component: {fileID: 3933155179532732017}
   m_Layer: 5
   m_Name: BuffUI
   m_TagString: Untagged
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3933155179532732017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237945498622316999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0135842b743e93e4ebf506cebbb9cfc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 1825010562498002138}
+  TMP: {fileID: 5115421382452095066}
 --- !u!1 &3136494934794210359
 GameObject:
   m_ObjectHideFlags: 0
