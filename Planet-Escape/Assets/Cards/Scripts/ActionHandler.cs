@@ -25,6 +25,11 @@ public class ActionHandler : MonoBehaviour
             case ActionType.DrawCards:
                 BattleManager.Singleton.DrawCards(action.amount);
                 break;
+            case ActionType.Heal:
+                break;
+            case ActionType.ApplyBuff:
+                target.AddBuff(action.Buff);
+                break;
         }
     }
     

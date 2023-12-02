@@ -41,6 +41,7 @@ public class HealthBar : MonoBehaviour
         if (block <= 0)
         {
             blockHealthBar.SetActive(false);
+            TMP.text = _damageable.CurrentLife + " / " + _damageable.MaxLife;
         }
         else
         {

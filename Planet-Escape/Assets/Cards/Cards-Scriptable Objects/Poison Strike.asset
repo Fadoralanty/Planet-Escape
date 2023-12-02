@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6250b89fc263ed4eadd28cd81b74845, type: 3}
-  m_Name: Example
+  m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
+  m_Name: Poison Strike
   m_EditorClassIdentifier: 
-  enemyName: Example
-  maxHealth: 15
-  moneyDrop: 0
-  EnemyActionsList:
+  CardName: Poison Strike
+  CardDescription: 'Deals 6 Damage
+
+    Apply 3 Poison'
+  CardCost: 1
+  CardType: 0
+  CardIcon: {fileID: 0}
+  _cardActions:
   - actionType: 0
     amount: 6
     Repetitions: 0
@@ -24,16 +28,10 @@ MonoBehaviour:
       buffStacks: 0
       currentStacks: 0
   - actionType: 4
-    amount: 6
+    amount: 0
     Repetitions: 0
     Buff:
       BuffType: 2
-      buffStacks: 6
+      buffStacks: 3
       currentStacks: 0
-  - actionType: 1
-    amount: 12
-    Repetitions: 0
-    Buff:
-      BuffType: 0
-      buffStacks: 0
-      currentStacks: 0
+  targetType: 1
