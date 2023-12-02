@@ -362,6 +362,7 @@ MonoBehaviour:
   - {fileID: 5771660437623008536}
   - {fileID: 2318139529681732154}
   character: {fileID: 5973421104271845924}
+  BuffsIcons: {fileID: 11400000, guid: b8e39f75346199d44954e06569da462c, type: 2}
 --- !u!1 &5973421104271845921
 GameObject:
   m_ObjectHideFlags: 0

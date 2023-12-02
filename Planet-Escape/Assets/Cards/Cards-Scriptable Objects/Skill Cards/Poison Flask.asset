@@ -10,15 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
-  m_Name: Cheap Shot
+  m_Name: Poison Flask
   m_EditorClassIdentifier: 
-  CardName: Cheap Shot
-  CardDescription: Deals 3 Damage
-  CardCost: 0
-  CardType: 0
+  CardName: Poison Flask
+  CardDescription: Apply 5 Poison
+  CardCost: 1
+  CardType: 1
   CardIcon: {fileID: 0}
   _cardActions:
-  - actionType: 0
-    amount: 3
+  - actionType: 4
+    amount: 0
     Repetitions: 0
+    Buff:
+      BuffType: 2
+      buffStacks: 5
+      currentStacks: 0
   targetType: 1

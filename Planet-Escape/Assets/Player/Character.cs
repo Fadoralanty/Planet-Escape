@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour
     
     protected Dictionary<BuffType, Buff> ActiveBuffs = new Dictionary<BuffType, Buff>();
     public Action<Buff> OnBuffAdded;
+    public Action<Buff> OnBuffUpdated;
     public Action<Buff> OnBuffRemoved;
 
     private void Start()
@@ -96,6 +97,7 @@ public abstract class Character : MonoBehaviour
             // }
             
             // display buffs
+            OnBuffUpdated?.Invoke(buff.Value);
         }
         RemoveEmptyBuffs();
 
@@ -118,6 +120,7 @@ public abstract class Character : MonoBehaviour
             // }
             
             // display buffs
+            OnBuffUpdated?.Invoke(buff.Value);
         }
         RemoveEmptyBuffs();
     }
