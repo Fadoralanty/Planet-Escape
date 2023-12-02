@@ -17,3 +17,4 @@ MonoBehaviour:
   buffIcon: {fileID: 0}
   debuffIcon: {fileID: 0}
   poisonIcon: {fileID: 21300000, guid: d29f62023cd5a8d49a868f804fcdd4b4, type: 3}
+  drainIcon: {fileID: 21300000, guid: e1c88fc0d3da1e1468cbc76269d2f9ea, type: 3}

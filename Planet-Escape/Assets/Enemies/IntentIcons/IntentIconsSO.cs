@@ -16,6 +16,8 @@ public class IntentIconsSO : ScriptableObject
     public Sprite DebuffIcon => debuffIcon;
     [SerializeField] private Sprite debuffIcon;    
     public Sprite PoisonIcon => poisonIcon;
-    [SerializeField] private Sprite poisonIcon;
+    [SerializeField] private Sprite poisonIcon;    
+    public Sprite DrainIcon => drainIcon;
+    [SerializeField] private Sprite drainIcon;
 
 }
