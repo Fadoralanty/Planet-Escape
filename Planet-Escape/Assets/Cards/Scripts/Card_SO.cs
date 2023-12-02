@@ -11,6 +11,7 @@ public enum ActionType
     DrawCards,
     Heal,
     ApplyBuff,
+    Drain
     
 }
 [CreateAssetMenu(fileName = "New Card")]

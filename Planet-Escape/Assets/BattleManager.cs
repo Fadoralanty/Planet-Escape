@@ -94,6 +94,7 @@ public class BattleManager : MonoBehaviour
             case NodeType.MinorEnemy:
                 int rnd = random.Next(PossibleMinorEnemies.Count);
                 Encounter encounter = Instantiate(PossibleMinorEnemies[rnd], transform.parent).GetComponent<Encounter>();
+                
                 encounter.transform.SetSiblingIndex(1);
                 foreach (var enemy in encounter.Enemies)
                 {

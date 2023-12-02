@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Enemy : Character
+public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
 {
     public Character Target;
     public bool isMidTurn;
@@ -15,6 +16,7 @@ public class Enemy : Character
     [SerializeField] private Image enemySprite;
     [SerializeField] private Image intentImage;
     [SerializeField] private TextMeshProUGUI intentNum;
+    [SerializeField] private TextMeshProUGUI name;
     private int _actionIndex;
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class Enemy : Character
         _damageable.SetData(_enemySo.MaxHealth);
         _actionIndex = 0;
         _damageable.OnDie += OnDieHandler;
+        name.text = _enemySo.EnemyName;
     }
 
     private void OnDieHandler()
@@ -45,6 +48,9 @@ public class Enemy : Character
                 break;
             case ActionType.ApplyBuff:
                 ApplyBuff(action.Buff);
+                break; 
+            case ActionType.Drain:
+                StartCoroutine(DrainHp(action));
                 break;
         }
     }
@@ -68,6 +74,19 @@ public class Enemy : Character
         yield return new WaitForSeconds(0.5f);
         //deal damage
         Target.Damageable.TakeDamage(enemyAction.amount);
+        yield return new WaitForSeconds(0.5f);
+        
+        EndTurn();
+
+    }    
+    IEnumerator DrainHp(EnemySO.EnemyActions enemyAction)
+    {
+        //play attack animation
+        
+        yield return new WaitForSeconds(0.5f);
+        //deal damage
+        Target.Damageable.TakeDamage(enemyAction.amount);
+        Damageable.GetHealing(enemyAction.amount);
         yield return new WaitForSeconds(0.5f);
         
         EndTurn();
@@ -111,6 +130,12 @@ public class Enemy : Character
                         break;
                 }
                 break;
+            case ActionType.DrawCards:
+                break;
+            case ActionType.Drain:
+                intentImage.sprite = intentIconsSo.DrainIcon;
+
+                break;
         }
     }
 
@@ -118,5 +143,15 @@ public class Enemy : Character
     {
         base.OnDestroy();
         _damageable.OnDie -= OnDieHandler;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        name.gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        name.gameObject.SetActive(false);
     }
 }

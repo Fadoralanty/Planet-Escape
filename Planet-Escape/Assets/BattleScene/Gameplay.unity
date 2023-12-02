@@ -1036,7 +1036,7 @@ MonoBehaviour:
   EndturnButton: {fileID: 472256123}
   TurnBannerAnimator: {fileID: 648323983}
   PossibleMinorEnemies:
-  - {fileID: 7027711623733869795, guid: 922c78f41156caf479d068406b52566a, type: 3}
+  - {fileID: 509934480213269500, guid: c272c16abfc77c04391e617b7cdc1bd4, type: 3}
   PossibleEnemies: []
   PossibleEliteEnemies: []
   CurrentEnemies: []
@@ -5630,7 +5630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -359, y: 12}
+  m_AnchoredPosition: {x: -603, y: 12}
   m_SizeDelta: {x: 350.5613, y: 350.5613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1619031145
