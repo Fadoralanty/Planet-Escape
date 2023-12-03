@@ -65,6 +65,20 @@ public abstract class Character : MonoBehaviour
                 _damageable.TakeDamage(buff.currentStacks);
                 buff.currentStacks = buff.currentStacks / 2;
                 break;
+            case BuffType.Burn:
+                _damageable.TakeDamage(buff.currentStacks);
+                buff.currentStacks = 0;
+                break;
+            case BuffType.Ice:
+                //_damageable.TakeDamage(buff.currentStacks);
+                buff.currentStacks -= 1;
+                break;
+            case BuffType.Slow:
+                break;
+            case BuffType.Fast:
+                break;
+            case BuffType.Stun:
+                break;
         }
     }
     
@@ -108,9 +122,12 @@ public abstract class Character : MonoBehaviour
         foreach (var buff in ActiveBuffs)
         {
 
-            if (buff.Value.BuffType == BuffType.Poison)
+            switch (buff.Value.BuffType)
             {
-                ApplyBuffEffect(buff.Value);
+                case BuffType.Poison:
+                case BuffType.Burn:
+                    ApplyBuffEffect(buff.Value);
+                    break;
             }
             // ActiveBuffs[buff.Key].buffStacks -= 1;
             //

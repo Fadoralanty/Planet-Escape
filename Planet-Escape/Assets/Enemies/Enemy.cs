@@ -64,6 +64,22 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
             case BuffType.Poison:
                 Target.AddBuff(buff);
                 break;
+            case BuffType.Burn:
+                Target.AddBuff(buff);
+                break;
+            case BuffType.Ice:
+                Target.AddBuff(buff);
+                break;
+            case BuffType.Slow:
+                Target.AddBuff(buff);
+                break;
+            case BuffType.Fast:
+                break;
+            case BuffType.Stun:
+                Target.AddBuff(buff);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
         EndTurn();
     }

@@ -19,5 +19,10 @@ public enum BuffType
 {
     None,
     Regeneration,
-    Poison
+    Poison,
+    Burn,
+    Ice,
+    Slow,
+    Fast,
+    Stun
 }

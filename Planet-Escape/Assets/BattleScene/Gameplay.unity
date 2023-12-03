@@ -1037,6 +1037,7 @@ MonoBehaviour:
   TurnBannerAnimator: {fileID: 648323983}
   PossibleMinorEnemies:
   - {fileID: 509934480213269500, guid: c272c16abfc77c04391e617b7cdc1bd4, type: 3}
+  - {fileID: 7027711623733869795, guid: a7516252b35cf3a4fb5427de861af778, type: 3}
   PossibleEnemies: []
   PossibleEliteEnemies: []
   CurrentEnemies: []

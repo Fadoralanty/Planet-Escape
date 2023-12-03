@@ -51,15 +51,17 @@ public class BuffCollection : MonoBehaviour
 
     private void AddBuffIcon(Buff buff)
     {
-        switch (buff.BuffType)
+        ActiveBuffUIItems[buff.BuffType].Image.sprite = buff.BuffType switch
         {
-            case BuffType.Regeneration:
-                ActiveBuffUIItems[buff.BuffType].Image.sprite = BuffsIcons.RegenIcon;
-                break;
-            case BuffType.Poison:
-                ActiveBuffUIItems[buff.BuffType].Image.sprite = BuffsIcons.PoisonIcon;
-                break;
-        }
+            BuffType.Regeneration => BuffsIcons.RegenIcon,
+            BuffType.Poison => BuffsIcons.PoisonIcon,
+            BuffType.Burn => BuffsIcons.BurnIcon,
+            BuffType.Ice => BuffsIcons.IceIcon,
+            BuffType.Slow => BuffsIcons.SlowIcon,
+            BuffType.Fast => BuffsIcons.FastIcon,
+            BuffType.Stun => BuffsIcons.StunIcon,
+            _ => ActiveBuffUIItems[buff.BuffType].Image.sprite
+        };
     }
     private void OnDestroy()
     {
