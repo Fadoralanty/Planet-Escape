@@ -92,6 +92,7 @@ public class BattleManager : MonoBehaviour
         switch (GameManager.Singleton.CurrentNodeType)
         {
             case NodeType.MinorEnemy:
+                random = new Random();
                 int rnd = random.Next(PossibleMinorEnemies.Count);
                 Encounter encounter = Instantiate(PossibleMinorEnemies[rnd], transform.parent).GetComponent<Encounter>();
                 
