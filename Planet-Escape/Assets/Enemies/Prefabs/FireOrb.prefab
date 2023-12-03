@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4802679810322586708, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -9.9314
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802679810322586708, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -273
+      objectReference: {fileID: 0}
     - target: {fileID: 5973421104271845920, guid: 922c78f41156caf479d068406b52566a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -99,5 +107,9 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 89a6f040c0fb0884193bae3bdce12623, type: 3}
+    - target: {fileID: 5973421104271845924, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: _enemySo
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ec2c465161c54243a8f59dc5fbb29cc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 922c78f41156caf479d068406b52566a, type: 3}

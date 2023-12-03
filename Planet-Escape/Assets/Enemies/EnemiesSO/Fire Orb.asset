@@ -17,14 +17,28 @@ MonoBehaviour:
   moneyDrop: 0
   EnemyActionsList:
   - actionType: 0
-    amount: 5
+    amount: 4
+    Repetitions: 2
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  - actionType: 4
+    amount: 0
+    Repetitions: 0
+    Buff:
+      BuffType: 3
+      buffStacks: 6
+      currentStacks: 0
+  - actionType: 0
+    amount: 6
     Repetitions: 0
     Buff:
       BuffType: 0
       buffStacks: 0
       currentStacks: 0
   - actionType: 1
-    amount: 5
+    amount: 10
     Repetitions: 0
     Buff:
       BuffType: 0

@@ -94,14 +94,17 @@ public abstract class Character : MonoBehaviour
             }
         }
     }
-    public void UpdateBuffsAtEndOfTurn()
+    public void UpdateBuffsAtEndOfTurn() //END OF TURN
     {
         if (ActiveBuffs.Count==0) {return; }
         foreach (var buff in ActiveBuffs)
         {
-            if (buff.Value.BuffType == BuffType.Regeneration)
+            switch (buff.Value.BuffType)
             {
-                ApplyBuffEffect(buff.Value);
+                case BuffType.Regeneration:
+                case BuffType.Burn:
+                    ApplyBuffEffect(buff.Value);
+                    break;
             }
             // ActiveBuffs[buff.Key].buffStacks -= 1;
             //
@@ -125,7 +128,6 @@ public abstract class Character : MonoBehaviour
             switch (buff.Value.BuffType)
             {
                 case BuffType.Poison:
-                case BuffType.Burn:
                     ApplyBuffEffect(buff.Value);
                     break;
             }

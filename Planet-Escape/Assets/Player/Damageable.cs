@@ -41,7 +41,7 @@ public class Damageable : MonoBehaviour
             OnBlockChange?.Invoke(_currentBlock);
             if (_currentBlock > 0)
             {
-                OnTakeDamage?.Invoke(_currentLife , 0);
+                OnTakeDamage?.Invoke(_currentLife , damage);
                 return;
             }
             else
