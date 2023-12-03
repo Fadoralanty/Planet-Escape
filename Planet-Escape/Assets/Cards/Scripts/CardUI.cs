@@ -39,7 +39,7 @@ public class CardUI : MonoBehaviour
 
     public void SetData(Card_SO cardSo)
     {
-        Debug.Log(cardSo.CardType);
+//        Debug.Log(cardSo.CardType);
         CardSo = cardSo;
         Image.sprite = cardSo.CardIcon;
         Name.text = CardSo.CardName;

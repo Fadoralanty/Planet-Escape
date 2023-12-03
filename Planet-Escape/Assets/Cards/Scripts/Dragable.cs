@@ -20,6 +20,12 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
         _lastPosition = _rectTransform.anchoredPosition;
         _lastRotation = _rectTransform.localRotation;
     }
+
+    private void Update()
+    {
+
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = new Vector3(eventData.position.x, eventData.position.y);
@@ -38,6 +44,8 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
             _rectTransform.position = _lastPosition;
             OnEndDragAction?.Invoke();
         }
+
+        isInHandZone = false;
 
     }
 
