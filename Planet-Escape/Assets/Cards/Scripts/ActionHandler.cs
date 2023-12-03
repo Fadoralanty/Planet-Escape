@@ -1,23 +1,28 @@
     using System;
     using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+    using System.Linq;
+    using UnityEngine;
 
 public class ActionHandler : MonoBehaviour
 {
-    public void DoActionMultiple(Card_SO.CardAction action, List<Enemy> targets)
+    public void DoActionMultiple(Card_SO.CardAction action, List<Enemy> targets, Character owner)
     {
         foreach (var target in targets)
         {
-            DoActionSingle(action, target);
+            DoActionSingle(action, target, owner);
         }
     }
-    public void DoActionSingle(Card_SO.CardAction action, Character target)
+    public void DoActionSingle(Card_SO.CardAction action, Character target, Character owner)
     {
         switch (action.actionType)
         {
             case ActionType.DealDamage:
                 DealDamage(action.amount, target.Damageable);
+                if (target.ActiveBuffs.ContainsKey(BuffType.Spikes))
+                {
+                    DealDamage(target.ActiveBuffs[BuffType.Spikes].buffStacks, owner.Damageable);
+                }
                 break;
             case ActionType.GainBlock:
                 GainBlock(action.amount, target.Damageable);

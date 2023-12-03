@@ -189,17 +189,17 @@ public class BattleManager : MonoBehaviour
             switch (targetType)
             {
                 case TargetType.Self:
-                    ActionHandler.DoActionSingle(cardAction, Player);
+                    ActionHandler.DoActionSingle(cardAction, Player,Player);
                     break;
                 case TargetType.SingleEnemy:
-                    ActionHandler.DoActionSingle(cardAction, SelectedEnemy);
+                    ActionHandler.DoActionSingle(cardAction, SelectedEnemy,Player);
                     break;
                 case TargetType.AllEnemies:
-                    ActionHandler.DoActionMultiple(cardAction, CurrentEnemies);
+                    ActionHandler.DoActionMultiple(cardAction, CurrentEnemies, Player);
                     break;
                 case TargetType.RandomEnemy:
                     int rndIndex = random.Next(CurrentEnemies.Count);
-                    ActionHandler.DoActionSingle(cardAction, CurrentEnemies[rndIndex]);
+                    ActionHandler.DoActionSingle(cardAction, CurrentEnemies[rndIndex],Player);
                     break;
 
             }
@@ -225,11 +225,17 @@ public class BattleManager : MonoBehaviour
             
             //HandleBuffs
             Player.UpdateBuffsAtEndOfTurn();
-            foreach (var enemy in CurrentEnemies)
+            for (int i = CurrentEnemies.Count-1 ; i >= 0; i--)
             {
-                enemy.Damageable.RemoveBlock();
-                enemy.UpdateBuffsAtBeginningOfTurn();
+                CurrentEnemies[i].Damageable.RemoveBlock();
+                CurrentEnemies[i].UpdateBuffsAtBeginningOfTurn();
+                
             }
+            // foreach (var enemy in CurrentEnemies)
+            // {
+            //     enemy.Damageable.RemoveBlock();
+            //     enemy.UpdateBuffsAtBeginningOfTurn();
+            // }
             
             //Show That its the enemy turn
             TurnBannerAnimator.Play("EnemyTurn");

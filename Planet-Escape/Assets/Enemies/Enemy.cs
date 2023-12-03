@@ -60,27 +60,20 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
     {
         switch (buff.BuffType)
         {
+            //Self buffs
             case BuffType.Regeneration:
-                break;
-            case BuffType.Poison:
-                Target.AddBuff(buff);
-                break;
-            case BuffType.Burn:
-                Target.AddBuff(buff);
-                break;
-            case BuffType.Ice:
-                Target.AddBuff(buff);
-                break;
-            case BuffType.Slow:
-                Target.AddBuff(buff);
-                break;
+            case BuffType.Spikes:
             case BuffType.Fast:
+                AddBuff(buff);
                 break;
+            //Debuffs to player
+            case BuffType.Poison:
+            case BuffType.Burn:
+            case BuffType.Ice:
+            case BuffType.Slow:
             case BuffType.Stun:
                 Target.AddBuff(buff);
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
         EndTurn();
     }
@@ -149,6 +142,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
                     BuffType.Slow => buffsIconsSo.SlowIcon,
                     BuffType.Fast => buffsIconsSo.FastIcon,
                     BuffType.Stun => buffsIconsSo.StunIcon,
+                    BuffType.Spikes => buffsIconsSo.SpikesIcon,
                     _ => intentImage.sprite
                 };
                 intentNum.text = action.Buff.buffStacks.ToString();
@@ -170,11 +164,11 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        name.gameObject.SetActive(true);
+        name.transform.parent.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        name.gameObject.SetActive(false);
+        name.transform.parent.gameObject.SetActive(false);
     }
 }

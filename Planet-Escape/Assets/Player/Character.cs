@@ -10,7 +10,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI DamageIndicatorTMP;
     [SerializeField]protected Animator _animator;
     
-    protected Dictionary<BuffType, Buff> ActiveBuffs = new Dictionary<BuffType, Buff>();
+    public Dictionary<BuffType, Buff> ActiveBuffs = new Dictionary<BuffType, Buff>();
     public Action<Buff> OnBuffAdded;
     public Action<Buff> OnBuffUpdated;
     public Action<Buff> OnBuffRemoved;
@@ -78,6 +78,10 @@ public abstract class Character : MonoBehaviour
             case BuffType.Fast:
                 break;
             case BuffType.Stun:
+                break;
+            case BuffType.None:
+                break;
+            case BuffType.Spikes:
                 break;
         }
     }
