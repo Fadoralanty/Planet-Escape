@@ -24,5 +24,6 @@ public enum BuffType
     Ice,
     Slow,
     Fast,
-    Stun
+    Stun,
+    Spikes
 }

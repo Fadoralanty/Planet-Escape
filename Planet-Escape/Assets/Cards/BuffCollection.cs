@@ -60,6 +60,7 @@ public class BuffCollection : MonoBehaviour
             BuffType.Slow => BuffsIcons.SlowIcon,
             BuffType.Fast => BuffsIcons.FastIcon,
             BuffType.Stun => BuffsIcons.StunIcon,
+            BuffType.Spikes => BuffsIcons.SpikesIcon,
             _ => ActiveBuffUIItems[buff.BuffType].Image.sprite
         };
     }

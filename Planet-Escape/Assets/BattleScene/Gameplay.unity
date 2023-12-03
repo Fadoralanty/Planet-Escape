@@ -825,7 +825,7 @@ MonoBehaviour:
   EndturnButton: {fileID: 472256123}
   TurnBannerAnimator: {fileID: 648323983}
   PossibleMinorEnemies:
-  - {fileID: 3675485957191890327, guid: 16c65e8f25052334f82a5d6af63a56d1, type: 3}
+  - {fileID: 5543239224803492883, guid: 4fea3fa4e12d33d42b59e3af4c5f426e, type: 3}
   PossibleEnemies: []
   PossibleEliteEnemies: []
   CurrentEnemies: []
