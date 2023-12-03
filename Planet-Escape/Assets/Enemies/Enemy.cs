@@ -17,7 +17,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Image enemySprite;
     [SerializeField] private Image intentImage;
     [SerializeField] private TextMeshProUGUI intentNum;
-    [SerializeField] private TextMeshProUGUI name;
+    [SerializeField] private TextMeshProUGUI enemyName;
     private int _actionIndex;
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
         _damageable.SetData(_enemySo.MaxHealth);
         _actionIndex = 0;
         _damageable.OnDie += OnDieHandler;
-        name.text = _enemySo.EnemyName;
+        enemyName.text = _enemySo.EnemyName;
     }
 
     private void OnDieHandler()
@@ -164,11 +164,11 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        name.transform.parent.gameObject.SetActive(true);
+        enemyName.transform.parent.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        name.transform.parent.gameObject.SetActive(false);
+        enemyName.transform.parent.gameObject.SetActive(false);
     }
 }

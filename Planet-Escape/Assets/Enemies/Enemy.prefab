@@ -488,7 +488,7 @@ MonoBehaviour:
   enemySprite: {fileID: 5973421104271845922}
   intentImage: {fileID: 5973421105964438807}
   intentNum: {fileID: 5973421104488015576}
-  name: {fileID: 203595833716435501}
+  enemyName: {fileID: 203595833716435501}
 --- !u!95 &2120088750
 Animator:
   serializedVersion: 5
@@ -851,7 +851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5302845027504159731
 RectTransform:
   m_ObjectHideFlags: 0
