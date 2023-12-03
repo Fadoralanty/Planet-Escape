@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: BuffIcons
   m_EditorClassIdentifier: 
   poisonIcon: {fileID: 21300000, guid: d29f62023cd5a8d49a868f804fcdd4b4, type: 3}
-  regenIcon: {fileID: 0}
-  slowIcon: {fileID: 0}
-  fastIcon: {fileID: 0}
-  spikes: {fileID: 0}
+  regenIcon: {fileID: 21300000, guid: 640ca2166693a704c8cad4a93c2ee19b, type: 3}
+  slowIcon: {fileID: 21300000, guid: 96bfbc3bcb21fa14e9ab33866819cacd, type: 3}
+  fastIcon: {fileID: 21300000, guid: aeb2068199cc0074a8591b9de37ff6be, type: 3}
+  spikes: {fileID: 21300000, guid: 3a417f544c712e342b331d7ca52888d4, type: 3}
+  burn: {fileID: 21300000, guid: e2cf57a48af8af94980858160a665f5c, type: 3}
+  ice: {fileID: 21300000, guid: e20c3cc80045a1942baa1fa3dcd39e07, type: 3}
+  stun: {fileID: 21300000, guid: 25ac5cec5b5b4fc4e89ca322ec13157e, type: 3}

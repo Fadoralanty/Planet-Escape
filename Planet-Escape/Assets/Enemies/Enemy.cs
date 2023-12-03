@@ -13,6 +13,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private EnemySO _enemySo;
     [Header("UI")]
     [SerializeField] private IntentIconsSO intentIconsSo;
+    [SerializeField] private BuffsIconsSO buffsIconsSo;
     [SerializeField] private Image enemySprite;
     [SerializeField] private Image intentImage;
     [SerializeField] private TextMeshProUGUI intentNum;
@@ -139,12 +140,18 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
             case ActionType.Heal:
                 break;
             case ActionType.ApplyBuff:
-                switch (action.Buff.BuffType)
+                intentImage.sprite = action.Buff.BuffType switch
                 {
-                    case BuffType.Poison:
-                        intentImage.sprite = intentIconsSo.PoisonIcon;
-                        break;
-                }
+                    BuffType.Poison => buffsIconsSo.PoisonIcon,
+                    BuffType.Regeneration => buffsIconsSo.RegenIcon,
+                    BuffType.Burn => buffsIconsSo.BurnIcon,
+                    BuffType.Ice => buffsIconsSo.IceIcon,
+                    BuffType.Slow => buffsIconsSo.SlowIcon,
+                    BuffType.Fast => buffsIconsSo.FastIcon,
+                    BuffType.Stun => buffsIconsSo.StunIcon,
+                    _ => intentImage.sprite
+                };
+                intentNum.text = action.Buff.buffStacks.ToString();
                 break;
             case ActionType.DrawCards:
                 break;
