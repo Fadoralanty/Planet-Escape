@@ -6203,6 +6203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
+      propertyPath: PlayersDeck.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 991c601b0f538314a8a9aacfbd5ca3e8, type: 2}
     - target: {fileID: 2668892923723951214, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: m_RootOrder
       value: 2
