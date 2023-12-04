@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ice Orb
   m_EditorClassIdentifier: 
   enemyName: Ice Orb
-  maxHealth: 35
+  maxHealth: 60
   moneyDrop: 0
   EnemyActionsList:
   - actionType: 0

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Map;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -215,6 +216,11 @@ public class BattleManager : MonoBehaviour
     }
     private void Victory()
     {
+        if (GameManager.Singleton.CurrentNodeType == NodeType.Boss)
+        {
+            SceneManager.LoadScene("VictoryScreen");
+            return;
+        }
         GameManager.Singleton.playerHealth = (int)Player.Damageable.CurrentLife;
         GameManager.Singleton.playerMaxHealth = (int)Player.Damageable.MaxLife;
         ChooseACard.gameObject.SetActive(true);

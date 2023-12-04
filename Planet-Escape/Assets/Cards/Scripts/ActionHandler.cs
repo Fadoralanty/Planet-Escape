@@ -31,6 +31,7 @@ public class ActionHandler : MonoBehaviour
                 BattleManager.Singleton.DrawCards(action.amount);
                 break;
             case ActionType.Heal:
+                target.Damageable.GetHealing(action.amount);
                 break;
             case ActionType.ApplyBuff:
                 target.AddBuff(action.Buff);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire Orb
   m_EditorClassIdentifier: 
   enemyName: Fire Orb
-  maxHealth: 40
+  maxHealth: 50
   moneyDrop: 0
   EnemyActionsList:
   - actionType: 0
