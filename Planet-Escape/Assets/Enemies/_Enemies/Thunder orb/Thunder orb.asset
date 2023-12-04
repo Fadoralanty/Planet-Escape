@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Thunder orb
   m_EditorClassIdentifier: 
   enemyName: Thunder orb
-  maxHealth: 32
+  maxHealth: 45
   moneyDrop: 0
   EnemyActionsList:
   - actionType: 0
