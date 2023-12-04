@@ -38,8 +38,9 @@ public class BattleManager : MonoBehaviour
     public Animator TurnBannerAnimator;
     [Header("Enemies")] 
     public List<Encounter> PossibleMinorEnemies;
-    public List<Encounter> PossibleEnemies;
+    public List<Encounter> PossibleNormalEnemies;
     public List<Encounter> PossibleEliteEnemies;
+    public List<Encounter> PossibleBosses;
     public List<Enemy> CurrentEnemies;
     public List<Enemy> allEnemies;
     public Enemy SelectedEnemy;
@@ -61,6 +62,7 @@ public class BattleManager : MonoBehaviour
     {
         EndturnButton.onClick.AddListener(EndTurn);
         Player.Damageable.OnDie += Defeat;
+        Player.Damageable.SetData(GameManager.Singleton.playerHealth,GameManager.Singleton.playerMaxHealth);
         GameOverScreen.SetActive(false);
         BeginCombat();
     }
@@ -92,25 +94,31 @@ public class BattleManager : MonoBehaviour
         switch (GameManager.Singleton.CurrentNodeType)
         {
             case NodeType.MinorEnemy:
-                random = new Random();
-                int rnd = random.Next(PossibleMinorEnemies.Count);
-                Encounter encounter = Instantiate(PossibleMinorEnemies[rnd], transform.parent).GetComponent<Encounter>();
-                
-                encounter.transform.SetSiblingIndex(1);
-                foreach (var enemy in encounter.Enemies)
-                {
-                    CurrentEnemies.Add(enemy);
-                    allEnemies.Add(enemy);
-                    enemy.Damageable.OnDie += OnEnemyDie;
-                }
+                SpawnRandomEnemy(PossibleMinorEnemies);
                 break;
             case NodeType.EliteEnemy:
                 break;
             case NodeType.Boss:
+                SpawnRandomEnemy(PossibleBosses);
                 break;
             case NodeType.Mystery:
                 break;
         }
+    }
+
+    private void SpawnRandomEnemy(List<Encounter> encounters)
+    {
+        random = new Random();
+        int rnd = random.Next(encounters.Count);
+        Encounter encounter = Instantiate(encounters[rnd], transform.parent).GetComponent<Encounter>();
+        encounter.transform.SetSiblingIndex(1);
+        foreach (var enemy in encounter.Enemies)
+        {
+            CurrentEnemies.Add(enemy);
+            allEnemies.Add(enemy);
+            enemy.Damageable.OnDie += OnEnemyDie;
+        }
+        
     }
     
 
@@ -207,6 +215,8 @@ public class BattleManager : MonoBehaviour
     }
     private void Victory()
     {
+        GameManager.Singleton.playerHealth = (int)Player.Damageable.CurrentLife;
+        GameManager.Singleton.playerMaxHealth = (int)Player.Damageable.MaxLife;
         ChooseACard.gameObject.SetActive(true);
     }    
     private void Defeat()

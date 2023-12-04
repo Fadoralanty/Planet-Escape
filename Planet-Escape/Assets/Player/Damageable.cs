@@ -17,10 +17,10 @@ public class Damageable : MonoBehaviour
     [SerializeField] private float _currentBlock;
 
 
-    public void SetData(float maxHealth)
+    public void SetData(float currentHealth, float maxHealth )
     {
         maxLife = maxHealth;
-        SetCurrentLife(maxHealth);
+        SetCurrentLife(currentHealth);
         OnTakeDamage?.Invoke(_currentLife, 0);
     }
 
@@ -35,6 +35,7 @@ public class Damageable : MonoBehaviour
     public void TakeDamage(float damage)
     {
             //trigger current block chjange event
+        damage = Mathf.Round(damage);
         if (_currentBlock > 0)
         {
             _currentBlock -= damage;

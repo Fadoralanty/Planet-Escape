@@ -85,6 +85,7 @@ namespace Map
                 case NodeType.Store:
                     break;
                 case NodeType.Boss:
+                    SceneManager.LoadScene("Gameplay");
                     break;
                 case NodeType.Mystery:
                     break;

@@ -10,7 +10,6 @@ public class Player : Character
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
-        _damageable.SetData(playerStats.MaxHealth);
         _damageable.OnDie += OnDieHandler;
     }
 

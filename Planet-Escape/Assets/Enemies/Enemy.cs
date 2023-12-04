@@ -22,7 +22,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
-        _damageable.SetData(_enemySo.MaxHealth);
+        _damageable.SetData(_enemySo.MaxHealth,_enemySo.MaxHealth);
         _actionIndex = 0;
         _damageable.OnDie += OnDieHandler;
         enemyName.text = _enemySo.EnemyName;
@@ -83,7 +83,12 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
         
         yield return new WaitForSeconds(0.5f);
         //deal damage
-        Target.Damageable.TakeDamage(enemyAction.amount);
+        float totalDamage = enemyAction.amount;
+        if (Target.ActiveBuffs.ContainsKey(BuffType.Ice))
+        {
+            totalDamage *= 1.5f;
+        }
+        Target.Damageable.TakeDamage(totalDamage);
         yield return new WaitForSeconds(0.5f);
         
         EndTurn();

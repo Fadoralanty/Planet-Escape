@@ -8,9 +8,9 @@ public class ActionHandler : MonoBehaviour
 {
     public void DoActionMultiple(Card_SO.CardAction action, List<Enemy> targets, Character owner)
     {
-        foreach (var target in targets)
+        for (var i = targets.Count - 1; i > 0; i--)
         {
-            DoActionSingle(action, target, owner);
+            DoActionSingle(action, targets[i], owner);
         }
     }
     public void DoActionSingle(Card_SO.CardAction action, Character target, Character owner)

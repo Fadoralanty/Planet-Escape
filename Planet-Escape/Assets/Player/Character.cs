@@ -25,6 +25,10 @@ public abstract class Character : MonoBehaviour
     {
         DamageIndicatorTMP.text = damage.ToString();
         _animator.Play("DamageIndicator");
+        if (ActiveBuffs.ContainsKey(BuffType.Ice))
+        {
+            RemoveBuff(ActiveBuffs[BuffType.Ice]);
+        }
     }
 
     public void AddBuff(Buff buff)

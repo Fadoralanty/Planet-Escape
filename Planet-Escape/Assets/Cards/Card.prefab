@@ -643,7 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handTransform: {fileID: 0}
   rectTransform: {fileID: 4615389132982284578}
-  onMouseHoverHeight: 100
+  onMouseHoverHeight: 150
 --- !u!95 &458100039067140702
 Animator:
   serializedVersion: 5
