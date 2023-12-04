@@ -723,7 +723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 16.417114, y: 93}
+  m_AnchoredPosition: {x: 16.417114, y: 52}
   m_SizeDelta: {x: 1534.893, y: 224.348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345545520
@@ -825,9 +825,15 @@ MonoBehaviour:
   EndturnButton: {fileID: 1208212628}
   TurnBannerAnimator: {fileID: 648323983}
   PossibleMinorEnemies:
+  - {fileID: 3675485957191890327, guid: 16c65e8f25052334f82a5d6af63a56d1, type: 3}
   - {fileID: 3924802607759659842, guid: ab4428104bdce8c4b91501f4b3621984, type: 3}
-  PossibleEnemies: []
+  - {fileID: 509934480213269500, guid: c272c16abfc77c04391e617b7cdc1bd4, type: 3}
+  - {fileID: 5543239224803492883, guid: 4fea3fa4e12d33d42b59e3af4c5f426e, type: 3}
+  - {fileID: 6499836834421538306, guid: 509837d560a998746a513be4020b77af, type: 3}
+  PossibleNormalEnemies: []
   PossibleEliteEnemies: []
+  PossibleBosses:
+  - {fileID: 1362704222418956257, guid: f6bcc613699b5784f9475d7a633df882, type: 3}
   CurrentEnemies: []
   allEnemies: []
   SelectedEnemy: {fileID: 0}
@@ -1375,6 +1381,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5db1be9dab3802c4d937b0828cf0787f, type: 2}
   - {fileID: 11400000, guid: 4b179be029028374b8a0f5ddbe7049c6, type: 2}
   - {fileID: 11400000, guid: 0c42dfa9612199749a391fe7905a9291, type: 2}
+  - {fileID: 11400000, guid: 7a8ebe49679de0a428c1651c15924e06, type: 2}
+  - {fileID: 11400000, guid: 201971449d240a748a048ce3e23abafa, type: 2}
+  - {fileID: 11400000, guid: 991c601b0f538314a8a9aacfbd5ca3e8, type: 2}
+  - {fileID: 11400000, guid: a698cbe7c2c193c47813f1e7f01b77d4, type: 2}
+  - {fileID: 11400000, guid: 4c685ad1c6415684fb5b581cf4f207e3, type: 2}
+  - {fileID: 11400000, guid: 10f74bb3dfcae8c4c8fc2d830581d16e, type: 2}
   cardsToChoose:
   - {fileID: 8799649785264786072}
   - {fileID: 2043488915}
@@ -6191,10 +6203,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
-      propertyPath: PlayersDeck.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4c685ad1c6415684fb5b581cf4f207e3, type: 2}
     - target: {fileID: 2668892923723951214, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: m_RootOrder
       value: 2
