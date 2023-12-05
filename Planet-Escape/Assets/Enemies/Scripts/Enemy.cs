@@ -174,6 +174,6 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        enemyName.transform.parent.gameObject.SetActive(false);
+       enemyName.transform.parent.gameObject.SetActive(false);
     }
 }
