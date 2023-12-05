@@ -11,19 +11,16 @@ public class HealthBar : MonoBehaviour
     [Header("Text")] [SerializeField] private TextMeshProUGUI TMP;
     [Header("Main HealthBar")]
     [SerializeField] private Image _healthBar;
-    [SerializeField] private Color _healthBarColor = new Color(1, 0, 0, 1);
     [Header("BLock bar")] 
     [SerializeField] private GameObject blockHealthBar;
-
+    [SerializeField] private GameObject blockIcon;
+    [SerializeField] private TextMeshProUGUI blockTMP;
+    
     [Header("Sub HealhBar")]
     [SerializeField] private Image _healthBarDelay;
-    [SerializeField] private Color _healthBarDelayColor = new Color(1, 0.8f, 0, 0.8f);
     [SerializeField] private float _loseHealthSpeed= 0.2f;
     [SerializeField] private float _loseHPSpeedNormal= 0.2f;
     [SerializeField] private float _loseHealthSpeedOneShot= 2f;
-    [Header("Backgorund HealthBar")]
-    [SerializeField] private Image _healthBarBackground;
-    [SerializeField] private Color _healthBarBackgroundColor = new Color(0.4f, 0, 0, 1);
 
     [Header("Life Components")]
     [SerializeField] private Damageable _damageable;
@@ -33,7 +30,6 @@ public class HealthBar : MonoBehaviour
     {
         _damageable.OnTakeDamage += FillHealthbar;
         _damageable.OnBlockChange += ShowBlueHealthBar;
-        InitHealthBarColor();
     }
 
     private void ShowBlueHealthBar(float block)
@@ -41,21 +37,18 @@ public class HealthBar : MonoBehaviour
         if (block <= 0)
         {
             blockHealthBar.SetActive(false);
-            TMP.text = _damageable.CurrentLife + " / " + _damageable.MaxLife;
+            blockIcon.SetActive(false);
+            blockTMP.text = "0";
+
         }
         else
         {
             blockHealthBar.SetActive(true);
-            TMP.text = _damageable.CurrentLife + " / " + _damageable.MaxLife + " + " + block;
+            blockIcon.SetActive(true);
+            blockTMP.text = block.ToString();
         }
     }
-
-    private void InitHealthBarColor()
-    {
-        _healthBar.color = _healthBarColor;
-        _healthBarDelay.color = _healthBarDelayColor;
-        _healthBarBackground.color = _healthBarBackgroundColor;
-    }
+    
     private void Update()
     {
         Fill2ndHealthbar();

@@ -16,9 +16,13 @@ MonoBehaviour:
   CardDescription: Gain 5 Defend
   CardCost: 1
   CardType: 1
-  CardIcon: {fileID: 0}
+  CardIcon: {fileID: 21300000, guid: f6b8b85cbdc82ce439a41ae3d56d57ee, type: 3}
   _cardActions:
   - actionType: 1
     amount: 5
     Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
   targetType: 0

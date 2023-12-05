@@ -34,11 +34,4 @@ public class Card_SO : ScriptableObject
         public int Repetitions;
         public Buff Buff;
     }
-    [ContextMenuItem("Set icon", "SetCustomIcon")]
-    public Texture2D icon;
- 
-    public void SetCustomIcon()
-    {
-        EditorGUIUtility.SetIconForObject(this, icon);
-    }
 }
