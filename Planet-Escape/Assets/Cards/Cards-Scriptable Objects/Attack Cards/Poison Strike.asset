@@ -18,7 +18,7 @@ MonoBehaviour:
     Apply 3 Poison'
   CardCost: 1
   CardType: 0
-  CardIcon: {fileID: 0}
+  CardIcon: {fileID: 21300000, guid: 32cf8bcf58300fa45a3bb5ed0086b587, type: 3}
   _cardActions:
   - actionType: 0
     amount: 6

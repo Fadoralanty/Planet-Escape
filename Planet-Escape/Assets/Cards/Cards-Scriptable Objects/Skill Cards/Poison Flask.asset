@@ -16,7 +16,7 @@ MonoBehaviour:
   CardDescription: Apply 5 Poison
   CardCost: 1
   CardType: 1
-  CardIcon: {fileID: 0}
+  CardIcon: {fileID: 21300000, guid: 923f30788f57b824ba566911ec5fbdde, type: 3}
   _cardActions:
   - actionType: 4
     amount: 0

@@ -18,7 +18,7 @@ MonoBehaviour:
     Consume'
   CardCost: 1
   CardType: 2
-  CardIcon: {fileID: 0}
+  CardIcon: {fileID: 21300000, guid: 3687a2513ff8ce24bbd49901f29b8227, type: 3}
   _cardActions:
   - actionType: 0
     amount: 12

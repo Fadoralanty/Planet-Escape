@@ -1804,12 +1804,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5973421104271845920}
     m_Modifications:
-    - target: {fileID: 772749347561201402, guid: db2f320291e003940b2a91e7dd1013d4, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
+    - target: {fileID: 5881384104812127869, guid: db2f320291e003940b2a91e7dd1013d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 204
       objectReference: {fileID: 0}
-    - target: {fileID: 772749347561201402, guid: db2f320291e003940b2a91e7dd1013d4, type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 5962847752161504900, guid: db2f320291e003940b2a91e7dd1013d4, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6924600166496849253, guid: db2f320291e003940b2a91e7dd1013d4, type: 3}
