@@ -13,16 +13,24 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Singleton;
     [Header("Player")] 
     public Player Player;
+    
     [Header("Cards")] 
     public Hand Hand;
     public List<Card_SO> drawPile = new List<Card_SO>();
     public List<Card_SO> discardPile = new List<Card_SO>();
     public List<Card_SO> cardsInHand = new List<Card_SO>();
+    public Card_SO SelectedCard;
     public int maxCardsInHand = 10;
     public int CardsDrawnPerTurn = 5;
     public ActionHandler ActionHandler;
     public TextMeshProUGUI drawPileText;
     public TextMeshProUGUI discardPileText;
+    
+    [Header("Card Multiplier")] 
+    public float multiplier = 1;
+    public TextMeshProUGUI multiplierTMP;
+    public List<Card_SO> cardsPlayed = new List<Card_SO>();
+
     [Header("Energy")]
     public int MaxEnergy;
     public int CurrentEnergy;
@@ -37,6 +45,7 @@ public class BattleManager : MonoBehaviour
     public Turn currentTurn;
     public Button EndturnButton;
     public Animator TurnBannerAnimator;
+    
     [Header("Enemies")] 
     public List<Encounter> PossibleMinorEnemies;
     public List<Encounter> PossibleNormalEnemies;
@@ -188,27 +197,67 @@ public class BattleManager : MonoBehaviour
         
         discardPile.Add(card.CardSo);
         discardPileText.text = discardPile.Count.ToString();
-
+        HandleMultiplier(card);
+        
     }
 
+    private void HandleMultiplier(CardUI cardUI)
+    {
+        if (cardsPlayed.Count > 0)
+        {
+            if (cardsPlayed[0].CardType != cardUI.CardSo.CardType)
+            {
+                ResetMultiplier();
+                return;
+            }
+        }
+        
+        cardsPlayed.Add(cardUI.CardSo);
+
+        multiplier = cardsPlayed.Count switch
+        {
+            2 => 1.2f,
+            3 => 1.3f,
+            4 => 1.5f,
+            5 => 1.6f,
+            6 => 1.8f,
+            7 => 2.0f,
+            _ => multiplier
+        };
+
+        multiplierTMP.text = multiplier.ToString("F1")+"x";
+        multiplierTMP.fontSize += 5;
+    }
+
+    private void ResetMultiplier()
+    {
+        multiplier = 1.0f;
+        multiplierTMP.text = multiplier.ToString("F1")+"x";
+        multiplierTMP.fontSize = 50;
+        cardsPlayed.Clear();
+    }
     public void PerformCardActions(List<Card_SO.CardAction> cardActions, TargetType targetType)
     {
         foreach (var cardAction in cardActions)
         {
+            Card_SO.CardAction action = cardAction;
+            action.amount = (int)Mathf.Round(action.amount * multiplier);
+            action.Buff.buffStacks = (int)Mathf.Round(action.Buff.buffStacks * multiplier);
+            
             switch (targetType)
             {
                 case TargetType.Self:
-                    ActionHandler.DoActionSingle(cardAction, Player,Player);
+                    ActionHandler.DoActionSingle(action, Player,Player);
                     break;
                 case TargetType.SingleEnemy:
-                    ActionHandler.DoActionSingle(cardAction, SelectedEnemy,Player);
+                    ActionHandler.DoActionSingle(action, SelectedEnemy,Player);
                     break;
                 case TargetType.AllEnemies:
-                    ActionHandler.DoActionMultiple(cardAction, CurrentEnemies, Player);
+                    ActionHandler.DoActionMultiple(action, CurrentEnemies, Player);
                     break;
                 case TargetType.RandomEnemy:
                     int rndIndex = random.Next(CurrentEnemies.Count);
-                    ActionHandler.DoActionSingle(cardAction, CurrentEnemies[rndIndex],Player);
+                    ActionHandler.DoActionSingle(action, CurrentEnemies[rndIndex],Player);
                     break;
 
             }
@@ -234,6 +283,7 @@ public class BattleManager : MonoBehaviour
     {
         if (currentTurn == Turn.Player)// si termino el turno del player
         {
+            ResetMultiplier();
             currentTurn = Turn.Enemy;
             EndturnButton.enabled = false;
             

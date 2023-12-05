@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 public enum CardType{Attack,Skill,Item}
 public enum TargetType{Self,SingleEnemy,AllEnemies,RandomEnemy}
@@ -32,5 +33,12 @@ public class Card_SO : ScriptableObject
         public int amount;
         public int Repetitions;
         public Buff Buff;
+    }
+    [ContextMenuItem("Set icon", "SetCustomIcon")]
+    public Texture2D icon;
+ 
+    public void SetCustomIcon()
+    {
+        EditorGUIUtility.SetIconForObject(this, icon);
     }
 }
