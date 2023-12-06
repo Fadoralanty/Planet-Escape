@@ -36,6 +36,16 @@ public class ActionHandler : MonoBehaviour
             case ActionType.ApplyBuff:
                 target.AddBuff(action.Buff);
                 break;
+            case ActionType.Drain:
+                DealDamage(action.amount, target.Damageable);
+                owner.Damageable.GetHealing(action.amount);
+                break;
+            case ActionType.GainEnergy:
+
+                break;
+            case ActionType.Consume:
+                
+                break;
         }
     }
     

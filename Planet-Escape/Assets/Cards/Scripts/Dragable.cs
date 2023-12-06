@@ -45,7 +45,7 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDrag
         }
         transform.position = new Vector3(eventData.position.x, eventData.position.y);
         transform.rotation = quaternion.Euler(Vector3.zero);
-        _canvasGroup.alpha = 0.6f;
+        _canvasGroup.alpha = 0.5f;
         _canvasGroup.blocksRaycasts = false;
     }
     public void OnEndDrag(PointerEventData eventData)

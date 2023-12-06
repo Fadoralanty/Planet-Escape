@@ -12,7 +12,9 @@ public enum ActionType
     DrawCards,
     Heal,
     ApplyBuff,
-    Drain
+    Drain,
+    GainEnergy,
+    Consume
     
 }
 [CreateAssetMenu(fileName = "New Card")]

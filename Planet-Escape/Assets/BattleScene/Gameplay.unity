@@ -840,7 +840,8 @@ MonoBehaviour:
   - {fileID: 5543239224803492883, guid: 4fea3fa4e12d33d42b59e3af4c5f426e, type: 3}
   - {fileID: 6499836834421538306, guid: 509837d560a998746a513be4020b77af, type: 3}
   PossibleNormalEnemies: []
-  PossibleEliteEnemies: []
+  PossibleEliteEnemies:
+  - {fileID: 4846101771879189612, guid: 7e4b724fec74d0d4aab83bbf0a1fa959, type: 3}
   PossibleBosses:
   - {fileID: 1362704222418956257, guid: f6bcc613699b5784f9475d7a633df882, type: 3}
   CurrentEnemies: []
@@ -1400,6 +1401,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a698cbe7c2c193c47813f1e7f01b77d4, type: 2}
   - {fileID: 11400000, guid: 4c685ad1c6415684fb5b581cf4f207e3, type: 2}
   - {fileID: 11400000, guid: 10f74bb3dfcae8c4c8fc2d830581d16e, type: 2}
+  - {fileID: 11400000, guid: b0e3872046ee8ef4b80f39aa11c31b8a, type: 2}
+  - {fileID: 11400000, guid: 87943ca125198d24ca534d9d8d3aae1d, type: 2}
+  - {fileID: 11400000, guid: ec8690e2cb576b44b98f25854bc37ccb, type: 2}
+  - {fileID: 11400000, guid: 3bb414d6bb8c3134aa3abb85f317ed51, type: 2}
   cardsToChoose:
   - {fileID: 8799649785264786072}
   - {fileID: 2043488915}
@@ -6475,7 +6480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: CurrentNodeType
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[0]
@@ -6489,6 +6494,14 @@ PrefabInstance:
       propertyPath: PlayersDeck.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 4c685ad1c6415684fb5b581cf4f207e3, type: 2}
+    - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
+      propertyPath: PlayersDeck.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 87943ca125198d24ca534d9d8d3aae1d, type: 2}
+    - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
+      propertyPath: PlayersDeck.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bb414d6bb8c3134aa3abb85f317ed51, type: 2}
     - target: {fileID: 2668892923723951214, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: m_RootOrder
       value: 2

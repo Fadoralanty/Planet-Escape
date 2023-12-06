@@ -29,8 +29,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 104731070302505276}
   - {fileID: 7410886932193003433}
+  - {fileID: 104731070302505276}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 104731070302505272}
   - {fileID: 7410886932193003437}
+  - {fileID: 104731070302505272}
 --- !u!1001 &211015734870981564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,7 +75,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7220800547454090261, guid: 9904d9da71526044184bdd5949f822ff, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7220800547454090261, guid: 9904d9da71526044184bdd5949f822ff, type: 3}
       propertyPath: m_AnchorMax.x
@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7220800547454090261, guid: 9904d9da71526044184bdd5949f822ff, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7220800547454090261, guid: 9904d9da71526044184bdd5949f822ff, type: 3}
       propertyPath: m_AnchorMax.x

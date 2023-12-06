@@ -25,10 +25,6 @@ public abstract class Character : MonoBehaviour
     {
         DamageIndicatorTMP.text = damage.ToString();
         _animator.Play("DamageIndicator");
-        if (ActiveBuffs.ContainsKey(BuffType.Ice))
-        {
-            RemoveBuff(ActiveBuffs[BuffType.Ice]);
-        }
     }
 
     public void AddBuff(Buff buff)
@@ -45,15 +41,22 @@ public abstract class Character : MonoBehaviour
             ActiveBuffs[newBuff.BuffType].currentStacks = newBuff.buffStacks;
             OnBuffAdded?.Invoke(newBuff);
         }
-        //display buff
     }
 
-    public void RemoveBuff(Buff buff)
+    private void RemoveBuff(Buff buff)
     {
         if (ActiveBuffs.ContainsKey(buff.BuffType))
         {
             ActiveBuffs.Remove(buff.BuffType);
             OnBuffRemoved?.Invoke(buff);
+        }
+    }   
+    private void RemoveBuff(BuffType buff)
+    {
+        if (ActiveBuffs.ContainsKey(buff))
+        {
+            OnBuffRemoved?.Invoke(ActiveBuffs[buff]);
+            ActiveBuffs.Remove(buff);
         }
     }
 
@@ -74,7 +77,6 @@ public abstract class Character : MonoBehaviour
                 buff.currentStacks = 0;
                 break;
             case BuffType.Ice:
-                //_damageable.TakeDamage(buff.currentStacks);
                 buff.currentStacks -= 1;
                 break;
             case BuffType.Slow:
@@ -87,40 +89,45 @@ public abstract class Character : MonoBehaviour
                 break;
             case BuffType.Spikes:
                 break;
+            case BuffType.AtkUp:
+                break;
+            case BuffType.DefUp:
+                break;
         }
     }
     
 
     private void RemoveEmptyBuffs()
     {
+        List<BuffType> buffsToRemove=new List<BuffType>();
         foreach (var buff in ActiveBuffs)
         {
             if (buff.Value.currentStacks == 0)
             {
-                RemoveBuff(buff.Value);
-                return;
+                //RemoveBuff(buff.Value);
+                buffsToRemove.Add(buff.Key);
             }
+        }
+
+        foreach (var buff in buffsToRemove)
+        {
+            RemoveBuff(buff);
         }
     }
     public void UpdateBuffsAtEndOfTurn() //END OF TURN
     {
         if (ActiveBuffs.Count==0) {return; }
+
         foreach (var buff in ActiveBuffs)
         {
             switch (buff.Value.BuffType)
             {
                 case BuffType.Regeneration:
                 case BuffType.Burn:
+                case BuffType.Ice:
                     ApplyBuffEffect(buff.Value);
                     break;
             }
-            // ActiveBuffs[buff.Key].buffStacks -= 1;
-            //
-            // if (ActiveBuffs[buff.Key].buffStacks <= 0) 
-            // {
-            //     RemoveBuff(buff.Value);
-            // }
-            
             // display buffs
             OnBuffUpdated?.Invoke(buff.Value);
         }
@@ -139,13 +146,7 @@ public abstract class Character : MonoBehaviour
                     ApplyBuffEffect(buff.Value);
                     break;
             }
-            // ActiveBuffs[buff.Key].buffStacks -= 1;
-            //
-            // if (ActiveBuffs[buff.Key].buffStacks <= 0) 
-            // {
-            //     RemoveBuff(buff.Value);
-            // }
-            
+
             // display buffs
             OnBuffUpdated?.Invoke(buff.Value);
         }
