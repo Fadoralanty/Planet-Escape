@@ -113,6 +113,7 @@ public class BattleManager : MonoBehaviour
                 SpawnRandomEnemy(PossibleBosses);
                 break;
             case NodeType.Mystery:
+                SpawnRandomEnemy(PossibleNormalEnemies);
                 break;
         }
     }
@@ -122,6 +123,7 @@ public class BattleManager : MonoBehaviour
         random = new Random();
         Encounter encounter;
         int rnd = random.Next(encounters.Count);
+        
         if (encounters.Count>1)
         {
             encounter = Instantiate(encounters[rnd], transform.parent).GetComponent<Encounter>();
@@ -195,7 +197,7 @@ public class BattleManager : MonoBehaviour
         if (card.CardSo.CardCost > CurrentEnergy) return;
         
         //PERFORM CARD ACTION
-        PerformCardActions(card.CardSo._cardActions, card.CardSo.targetType);
+        PerformCardActions(card.CardSo._cardActions, card.CardSo.targetType, card.CardSo);
 
         CurrentEnergy -= card.CardSo.CardCost;
         EnergyText.text = CurrentEnergy.ToString();
@@ -203,10 +205,12 @@ public class BattleManager : MonoBehaviour
         cardsInHand.Remove(card.CardSo);
         Hand.DeActivateCard(card);
         Hand.UpdateHand();
+        HandleMultiplier(card);
+
+        if (card.CardSo._cardActions[^1].actionType == ActionType.Consume) { return; }
         
         discardPile.Add(card.CardSo);
         discardPileText.text = discardPile.Count.ToString();
-        HandleMultiplier(card);
         
     }
 
@@ -245,7 +249,7 @@ public class BattleManager : MonoBehaviour
         multiplierTMP.fontSize = 50;
         cardsPlayed.Clear();
     }
-    public void PerformCardActions(List<Card_SO.CardAction> cardActions, TargetType targetType)
+    public void PerformCardActions(List<Card_SO.CardAction> cardActions, TargetType targetType, Card_SO cardSo)
     {
         foreach (var cardAction in cardActions)
         {
@@ -256,17 +260,17 @@ public class BattleManager : MonoBehaviour
             switch (targetType)
             {
                 case TargetType.Self:
-                    ActionHandler.DoActionSingle(action, Player,Player);
+                    ActionHandler.DoActionSingle(action, Player,Player, cardSo);
                     break;
                 case TargetType.SingleEnemy:
-                    ActionHandler.DoActionSingle(action, SelectedEnemy,Player);
+                    ActionHandler.DoActionSingle(action, SelectedEnemy,Player, cardSo);
                     break;
                 case TargetType.AllEnemies:
-                    ActionHandler.DoActionMultiple(action, CurrentEnemies, Player);
+                    ActionHandler.DoActionMultiple(action, CurrentEnemies, Player, cardSo);
                     break;
                 case TargetType.RandomEnemy:
                     int rndIndex = random.Next(CurrentEnemies.Count);
-                    ActionHandler.DoActionSingle(action, CurrentEnemies[rndIndex],Player);
+                    ActionHandler.DoActionSingle(action, CurrentEnemies[rndIndex],Player, cardSo);
                     break;
 
             }

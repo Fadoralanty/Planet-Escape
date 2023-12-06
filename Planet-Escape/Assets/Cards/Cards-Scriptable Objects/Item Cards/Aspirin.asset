@@ -27,4 +27,11 @@ MonoBehaviour:
       BuffType: 1
       buffStacks: 5
       currentStacks: 0
+  - actionType: 7
+    amount: 0
+    Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
   targetType: 0

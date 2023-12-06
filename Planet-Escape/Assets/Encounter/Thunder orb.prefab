@@ -59,6 +59,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2434919306935565998}
     m_Modifications:
+    - target: {fileID: 182440822000613442, guid: f15ef1b8a9feb74449bdd138b95b8fc8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 117.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 182440822000613442, guid: f15ef1b8a9feb74449bdd138b95b8fc8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -179.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1871966213803174288, guid: f15ef1b8a9feb74449bdd138b95b8fc8, type: 3}
       propertyPath: m_Name
       value: Thunder Orb

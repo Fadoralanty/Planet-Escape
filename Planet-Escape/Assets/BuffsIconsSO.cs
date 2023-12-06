@@ -21,6 +21,8 @@ public class BuffsIconsSO : ScriptableObject
     [SerializeField] private Sprite ice;
     public Sprite StunIcon => stun;
     [SerializeField] private Sprite stun;
+    public Sprite AtkUp => atkUp;
+    [SerializeField] private Sprite atkUp;
     
 
 }
