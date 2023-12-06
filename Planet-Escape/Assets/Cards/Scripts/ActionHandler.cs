@@ -18,11 +18,16 @@ public class ActionHandler : MonoBehaviour
         switch (action.actionType)
         {
             case ActionType.DealDamage:
-                DealDamage(action.amount, target.Damageable);
+                int TotalDamage = action.amount;
                 if (target.ActiveBuffs.ContainsKey(BuffType.Spikes))
                 {
                     DealDamage(target.ActiveBuffs[BuffType.Spikes].buffStacks, owner.Damageable);
                 }
+                if (owner.ActiveBuffs.ContainsKey(BuffType.AtkUp))
+                {
+                    TotalDamage += owner.ActiveBuffs[BuffType.AtkUp].currentStacks;
+                }
+                DealDamage(TotalDamage, target.Damageable);
                 break;
             case ActionType.GainBlock:
                 GainBlock(action.amount, target.Damageable);

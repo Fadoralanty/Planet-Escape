@@ -24,7 +24,7 @@ MonoBehaviour:
       buffStacks: 0
       currentStacks: 0
   - actionType: 0
-    amount: 30
+    amount: 25
     Repetitions: 0
     Buff:
       BuffType: 0
