@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     {
         IsNewGame = true;
         SceneManager.LoadScene("Map");
+        playerMaxHealth = PlayerSo.MaxHealth;
+        playerHealth = playerMaxHealth;
     }
 
     public void RemoveCardFromPlayersDeck(Card_SO card)

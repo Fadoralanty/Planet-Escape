@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CardSelectionElement : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
@@ -54,6 +55,7 @@ public class CardSelectionElement : MonoBehaviour, IPointerDownHandler, IPointer
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (SceneManager.GetActiveScene().name == "Map") { return; }
         GameManager.Singleton.RemoveCardFromPlayersDeck(CardSo);
         OnClick.Invoke();
     }
