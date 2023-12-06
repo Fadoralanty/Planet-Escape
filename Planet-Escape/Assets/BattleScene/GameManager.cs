@@ -33,18 +33,25 @@ public class GameManager : MonoBehaviour
         playerMaxHealth = PlayerSo.MaxHealth;
         playerHealth = playerMaxHealth;
     }
-
+    
     public void NewGame()
     {
         IsNewGame = true;
         SceneManager.LoadScene("Map");
     }
 
+    public void RemoveCardFromPlayersDeck(Card_SO card)
+    {
+        if (PlayersDeck.Contains(card))
+        {
+            PlayersDeck.Remove(card);
+        }
+    }
     public void GoBackToMapScreen()
     {
         SceneManager.LoadScene("Map");
     }
-
+    
     public void HealPlayer(int amount)
     {
         playerHealth += amount;

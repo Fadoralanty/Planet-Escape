@@ -3,36 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardReward : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler, IPointerClickHandler
+public class CardSelectionElement : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Card_SO _cardSo;
-    [SerializeField] private Image Image;
-    [SerializeField] private Image border;
-    [SerializeField] private Image coloredFrame;
-    [SerializeField] private TextMeshProUGUI Name;
-    [SerializeField] private TextMeshProUGUI Description;
-    [SerializeField] private TextMeshProUGUI cost;
-    [SerializeField] private TextMeshProUGUI SkipButtonTMP;
-    private Animator _animator;
-    
+    public UnityEvent OnClick;
+    public Card_SO CardSo;
+    public Image Image;
+    public Image coloredFrame;
+    public Image border;
+    public TextMeshProUGUI Name;
+    public TextMeshProUGUI Description;
+    public TextMeshProUGUI cost;
+    public TextMeshProUGUI cardType;
     public Color AttackColor;
     public Color SkillColor;
     public Color ItemColor;
+    private Animator _animator;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
     }
+
     public void SetData(Card_SO cardSo)
     {
-        _cardSo = cardSo;
-        Image.sprite = _cardSo.CardIcon;
-        Name.text = _cardSo.CardName;
-        Description.text = _cardSo.CardDescription;
-        cost.text = _cardSo.CardCost.ToString();
-        gameObject.name = _cardSo.CardName;
+        CardSo = cardSo;
+        Image.sprite = cardSo.CardIcon;
+        Name.text = CardSo.CardName;
+        Description.text = CardSo.CardDescription;
+        cost.text = CardSo.CardCost.ToString();
+        gameObject.name = CardSo.CardName;
         switch (cardSo.CardType)
         {
             case CardType.Attack:
@@ -45,6 +48,14 @@ public class CardReward : MonoBehaviour, IPointerExitHandler, IPointerEnterHandl
                 coloredFrame.color = ItemColor;
                 break;
         }
+
+        cardType.text = cardSo.CardType.ToString();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        GameManager.Singleton.RemoveCardFromPlayersDeck(CardSo);
+        OnClick.Invoke();
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -56,12 +67,6 @@ public class CardReward : MonoBehaviour, IPointerExitHandler, IPointerEnterHandl
     {
         _animator.Play("OnHoverEnter");
         border.gameObject.SetActive(true);
-    }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        GameManager.Singleton.PlayersDeck.Add(_cardSo);
-        SkipButtonTMP.text = "Continue";
-        transform.parent.gameObject.SetActive(false);
     }
 }

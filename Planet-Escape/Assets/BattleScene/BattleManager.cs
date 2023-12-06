@@ -107,6 +107,7 @@ public class BattleManager : MonoBehaviour
                 SpawnRandomEnemy(PossibleMinorEnemies);
                 break;
             case NodeType.EliteEnemy:
+                SpawnRandomEnemy(PossibleEliteEnemies);
                 break;
             case NodeType.Boss:
                 SpawnRandomEnemy(PossibleBosses);
@@ -119,8 +120,16 @@ public class BattleManager : MonoBehaviour
     private void SpawnRandomEnemy(List<Encounter> encounters)
     {
         random = new Random();
+        Encounter encounter;
         int rnd = random.Next(encounters.Count);
-        Encounter encounter = Instantiate(encounters[rnd], transform.parent).GetComponent<Encounter>();
+        if (encounters.Count>1)
+        {
+            encounter = Instantiate(encounters[rnd], transform.parent).GetComponent<Encounter>();
+        }
+        else
+        {
+            encounter = Instantiate(encounters[0], transform.parent).GetComponent<Encounter>();
+        }
         encounter.transform.SetSiblingIndex(1);
         foreach (var enemy in encounter.Enemies)
         {
@@ -134,7 +143,7 @@ public class BattleManager : MonoBehaviour
 
     private void ShuffleDeck()
     {
-        for (var i = discardPile.Count - 1; i > 0; i--)
+        for (var i = discardPile.Count - 1; i >= 0; i--)
         {
             var temp = discardPile[i];
             var index = random.Next(0, i + 1);
@@ -340,8 +349,9 @@ public class BattleManager : MonoBehaviour
     IEnumerator ExecuteEnemyTurn()
     {
         yield return new WaitForSeconds(1f);
-        foreach (var enemy in CurrentEnemies)
+        for (var i = 0; i < CurrentEnemies.Count; i++)
         {
+            var enemy = CurrentEnemies[i];
             enemy.isMidTurn = true;
             enemy.TakeTurn();
             while (enemy.isMidTurn)
@@ -349,6 +359,7 @@ public class BattleManager : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+
         ChangeTurn();
     }
 

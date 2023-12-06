@@ -21,7 +21,7 @@ public class RestSite : MonoBehaviour
         HideButtons();
     }
 
-    private void HideButtons()
+    public void HideButtons()
     {
         foreach (var button in buttons)
         {
