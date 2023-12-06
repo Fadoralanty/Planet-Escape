@@ -64,6 +64,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
             case BuffType.Regeneration:
             case BuffType.Spikes:
             case BuffType.Fast:
+            case BuffType.AtkUp:
                 AddBuff(buff);
                 break;
             //Debuffs to player
@@ -84,6 +85,11 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
         yield return new WaitForSeconds(0.5f);
         //deal damage
         float totalDamage = enemyAction.amount;
+        if (ActiveBuffs.ContainsKey(BuffType.AtkUp))
+        {
+            totalDamage += ActiveBuffs[BuffType.AtkUp].currentStacks;
+
+        }
         if (Target.ActiveBuffs.ContainsKey(BuffType.Ice))
         {
             totalDamage *= 1.5f;
@@ -126,7 +132,10 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
     public void ShowIntent()
     {
         EnemySO.EnemyActions action = _enemySo.EnemyActionsList[_actionIndex];
-        intentNum.text = action.amount.ToString();
+        float totalDamage = action.amount;
+        if (ActiveBuffs.ContainsKey(BuffType.AtkUp)) { totalDamage += ActiveBuffs[BuffType.AtkUp].currentStacks; }
+        
+        intentNum.text = totalDamage.ToString();
         switch (action.actionType)
         {
             case ActionType.DealDamage:
@@ -148,6 +157,7 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
                     BuffType.Fast => buffsIconsSo.FastIcon,
                     BuffType.Stun => buffsIconsSo.StunIcon,
                     BuffType.Spikes => buffsIconsSo.SpikesIcon,
+                    BuffType.AtkUp => buffsIconsSo.AtkUp,
                     _ => intentImage.sprite
                 };
                 intentNum.text = action.Buff.buffStacks.ToString();

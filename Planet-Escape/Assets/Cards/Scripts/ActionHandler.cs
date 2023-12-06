@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 public class ActionHandler : MonoBehaviour
 {
-    public void DoActionMultiple(Card_SO.CardAction action, List<Enemy> targets, Character owner)
+    public void DoActionMultiple(Card_SO.CardAction action, List<Enemy> targets, Character owner, Card_SO cardSo)
     {
         for (var i = targets.Count - 1; i >= 0; i--)
         {
-            DoActionSingle(action, targets[i], owner);
+            DoActionSingle(action, targets[i], owner, cardSo);
         }
     }
-    public void DoActionSingle(Card_SO.CardAction action, Character target, Character owner)
+    public void DoActionSingle(Card_SO.CardAction action, Character target, Character owner, Card_SO cardSo)
     {
         switch (action.actionType)
         {
@@ -44,7 +44,7 @@ public class ActionHandler : MonoBehaviour
 
                 break;
             case ActionType.Consume:
-                
+                GameManager.Singleton.RemoveCardFromPlayersDeck(cardSo);
                 break;
         }
     }

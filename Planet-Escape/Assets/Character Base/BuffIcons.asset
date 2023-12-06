@@ -20,3 +20,4 @@ MonoBehaviour:
   burn: {fileID: 21300000, guid: e2cf57a48af8af94980858160a665f5c, type: 3}
   ice: {fileID: 21300000, guid: e20c3cc80045a1942baa1fa3dcd39e07, type: 3}
   stun: {fileID: 21300000, guid: 25ac5cec5b5b4fc4e89ca322ec13157e, type: 3}
+  atkUp: {fileID: 21300000, guid: c385c495839a1cc4a8464369711c1368, type: 3}

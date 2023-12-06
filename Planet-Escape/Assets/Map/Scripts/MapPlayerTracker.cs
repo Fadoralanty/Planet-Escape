@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Map
 {
@@ -76,21 +77,35 @@ namespace Map
                     SceneManager.LoadScene("Gameplay");
                     break;
                 case NodeType.EliteEnemy:
+                    SceneManager.LoadScene("Gameplay");
                     break;
                 case NodeType.RestSite:
                     SceneManager.LoadScene("Rest Site/Rest Site");
                     break;
                 case NodeType.Treasure:
+                    SceneManager.LoadScene("AddCard");
                     break;
                 case NodeType.Store:
+                    SceneManager.LoadScene("AddCard");
                     break;
                 case NodeType.Boss:
-                    SceneManager.LoadScene("Gameplay");
+                    SceneManager.LoadScene("Gameplay"); 
                     break;
                 case NodeType.Mystery:
+                    int rnd = Random.Range(1, 3);
+                    switch (rnd)
+                    {
+                        case 1:
+                            SceneManager.LoadScene("Gameplay");
+                            break;
+                        case 2:
+                            SceneManager.LoadScene("Rest Site/Rest Site");
+                            break;
+                        case 3:
+                            SceneManager.LoadScene("AddCard");
+                            break;
+                    }
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
