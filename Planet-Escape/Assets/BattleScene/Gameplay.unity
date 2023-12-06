@@ -5633,7 +5633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839306505577585837, guid: cdc6feae1b90fee40b6d605449c11e71, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 839306505577585837, guid: cdc6feae1b90fee40b6d605449c11e71, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5727,7 +5727,7 @@ PrefabInstance:
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 7a8ebe49679de0a428c1651c15924e06, type: 2}
+      objectReference: {fileID: 11400000, guid: d759f2877cc7a3a4091c6bf44edde1f3, type: 2}
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[1]
       value: 
@@ -5735,11 +5735,15 @@ PrefabInstance:
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 4c685ad1c6415684fb5b581cf4f207e3, type: 2}
+      objectReference: {fileID: 11400000, guid: bea399de9dcd93249b3935436d24af8c, type: 2}
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 87943ca125198d24ca534d9d8d3aae1d, type: 2}
+    - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
+      propertyPath: PlayersDeck.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 32a855a2d7b0e74468bb0b10f7c0ed1b, type: 2}
     - target: {fileID: 2668892923723951201, guid: e6714b8d295327542993db8729c47f80, type: 3}
       propertyPath: PlayersDeck.Array.data[5]
       value: 

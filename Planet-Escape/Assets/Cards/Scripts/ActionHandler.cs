@@ -41,7 +41,7 @@ public class ActionHandler : MonoBehaviour
                 owner.Damageable.GetHealing(action.amount);
                 break;
             case ActionType.GainEnergy:
-
+                BattleManager.Singleton.GainEnergy(action.amount);
                 break;
             case ActionType.Consume:
                 GameManager.Singleton.RemoveCardFromPlayersDeck(cardSo);

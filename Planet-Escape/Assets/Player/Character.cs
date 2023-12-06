@@ -66,11 +66,11 @@ public abstract class Character : MonoBehaviour
         {
             case BuffType.Regeneration:
                 _damageable.GetHealing(buff.currentStacks);
-                buff.currentStacks = buff.currentStacks / 2; 
+                buff.currentStacks -= 2;
                 break;
             case BuffType.Poison:
                 _damageable.TakeDamage(buff.currentStacks);
-                buff.currentStacks = buff.currentStacks / 2;
+                buff.currentStacks -= 2;
                 break;
             case BuffType.Burn:
                 _damageable.TakeDamage(buff.currentStacks);

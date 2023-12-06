@@ -95,6 +95,10 @@ public class Enemy : Character, IPointerEnterHandler, IPointerExitHandler
             totalDamage *= 1.5f;
         }
         Target.Damageable.TakeDamage(totalDamage);
+        if (Target.ActiveBuffs.ContainsKey(BuffType.Spikes))
+        {
+            Damageable.TakeDamage(Target.ActiveBuffs[BuffType.Spikes].currentStacks);
+        }
         yield return new WaitForSeconds(0.5f);
         
         EndTurn();

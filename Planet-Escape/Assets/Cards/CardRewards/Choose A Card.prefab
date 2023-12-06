@@ -619,6 +619,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87943ca125198d24ca534d9d8d3aae1d, type: 2}
   - {fileID: 11400000, guid: ec8690e2cb576b44b98f25854bc37ccb, type: 2}
   - {fileID: 11400000, guid: 3bb414d6bb8c3134aa3abb85f317ed51, type: 2}
+  - {fileID: 11400000, guid: 355772ada7bc5594eb45729b1d3db82c, type: 2}
+  - {fileID: 11400000, guid: 32a855a2d7b0e74468bb0b10f7c0ed1b, type: 2}
+  - {fileID: 11400000, guid: d759f2877cc7a3a4091c6bf44edde1f3, type: 2}
+  - {fileID: 11400000, guid: bea399de9dcd93249b3935436d24af8c, type: 2}
   cardsToChoose:
   - {fileID: 3605884425759658491}
   - {fileID: 7268575754050973249}

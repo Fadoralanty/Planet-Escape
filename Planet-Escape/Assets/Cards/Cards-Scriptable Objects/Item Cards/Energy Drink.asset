@@ -10,34 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
-  m_Name: Overdose
+  m_Name: Energy Drink
   m_EditorClassIdentifier: 
-  CardName: Overdose
-  CardDescription: 'Lose 4 HP
+  CardName: Energy Drink
+  CardDescription: 'Gain 2 energy
 
-    Draw 3 cards
-
-    Gain 1 energy'
+    Consume'
   CardCost: 0
-  CardType: 1
-  CardIcon: {fileID: 21300000, guid: d95dd4f58050e4340828c10999a7fad0, type: 3}
+  CardType: 2
+  CardIcon: {fileID: 21300000, guid: 886890a5d06ac374a9b3542ad405c60a, type: 3}
   _cardActions:
-  - actionType: 0
-    amount: 4
-    Repetitions: 0
-    Buff:
-      BuffType: 0
-      buffStacks: 0
-      currentStacks: 0
-  - actionType: 2
-    amount: 3
-    Repetitions: 0
-    Buff:
-      BuffType: 0
-      buffStacks: 0
-      currentStacks: 0
   - actionType: 6
-    amount: 1
+    amount: 2
+    Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  - actionType: 7
+    amount: 0
     Repetitions: 0
     Buff:
       BuffType: 0
