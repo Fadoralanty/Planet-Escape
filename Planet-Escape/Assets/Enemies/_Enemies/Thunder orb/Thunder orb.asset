@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6250b89fc263ed4eadd28cd81b74845, type: 3}
+  m_Name: Thunder orb
+  m_EditorClassIdentifier: 
+  enemyName: Thunder orb
+  maxHealth: 45
+  moneyDrop: 0
+  EnemyActionsList:
+  - actionType: 0
+    amount: 9
+    Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  - actionType: 0
+    amount: 9
+    Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  - actionType: 4
+    amount: 6
+    Repetitions: 0
+    Buff:
+      BuffType: 7
+      buffStacks: 1
+      currentStacks: 0
+  - actionType: 0
+    amount: 7
+    Repetitions: 0
+    Buff:
+      BuffType: 7
+      buffStacks: 1
+      currentStacks: 0
+  - actionType: 1
+    amount: 9
+    Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0

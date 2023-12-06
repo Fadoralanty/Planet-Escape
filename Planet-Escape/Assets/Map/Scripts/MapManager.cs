@@ -34,13 +34,19 @@ namespace Map
             {
                 GenerateNewMap();
             }
+            
+            if (GameManager.Singleton.IsNewGame)
+            {
+                GameManager.Singleton.IsNewGame = false;
+                GenerateNewMap();
+            }
         }
 
         public void GenerateNewMap()
         {
             var map = MapGenerator.GetMap(config);
             CurrentMap = map;
-            Debug.Log(map.ToJson());
+            //Debug.Log(map.ToJson());
             view.ShowMap(map);
         }
 

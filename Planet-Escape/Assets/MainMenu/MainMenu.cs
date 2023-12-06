@@ -7,11 +7,16 @@ public class MainMenu : MonoBehaviour
 {
     public void NewGame()
     {
-        SceneManager.LoadScene("MapUI");
+        GameManager.Singleton.NewGame();
     }
 
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("VictoryScreen");
     }
 }

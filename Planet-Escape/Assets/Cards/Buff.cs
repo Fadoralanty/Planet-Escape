@@ -5,12 +5,27 @@ using UnityEngine;
 public class Buff
 {
     public BuffType BuffType;
-    public int StatModifier;
-    public int TurnAmountDuration;
     public int buffStacks;
+    public int currentStacks;
+
+    public Buff(Buff buff)
+    {
+        BuffType = buff.BuffType;
+        buffStacks = buff.buffStacks;
+        currentStacks = buff.currentStacks;
+    }
 }
 public enum BuffType
 {
+    None,
     Regeneration,
-    
+    Poison,
+    Burn,
+    Ice,
+    Slow,
+    Fast,
+    Stun,
+    Spikes,
+    AtkUp,
+    DefUp
 }

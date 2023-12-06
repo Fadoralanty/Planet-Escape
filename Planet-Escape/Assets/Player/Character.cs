@@ -9,7 +9,11 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected Damageable _damageable;
     [SerializeField] protected TextMeshProUGUI DamageIndicatorTMP;
     [SerializeField]protected Animator _animator;
-    protected Dictionary<BuffType, Buff> ActiveBuffs = new Dictionary<BuffType, Buff>();
+    
+    public Dictionary<BuffType, Buff> ActiveBuffs = new Dictionary<BuffType, Buff>();
+    public Action<Buff> OnBuffAdded;
+    public Action<Buff> OnBuffUpdated;
+    public Action<Buff> OnBuffRemoved;
 
     private void Start()
     {
@@ -17,7 +21,7 @@ public abstract class Character : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnTakeDamageHandler(float currLife, float damage)
+    protected virtual void OnTakeDamageHandler(float currLife, float damage)
     {
         DamageIndicatorTMP.text = damage.ToString();
         _animator.Play("DamageIndicator");
@@ -27,40 +31,129 @@ public abstract class Character : MonoBehaviour
     {
         if (ActiveBuffs.ContainsKey(buff.BuffType))
         {
-            ActiveBuffs[buff.BuffType].buffStacks += buff.buffStacks;
+            ActiveBuffs[buff.BuffType].currentStacks += buff.buffStacks;
+            OnBuffAdded?.Invoke(ActiveBuffs[buff.BuffType]);  
         }
         else
         {
-            ActiveBuffs.Add(buff.BuffType, buff);
+            Buff newBuff = new Buff(buff);
+            ActiveBuffs.Add(newBuff.BuffType, newBuff);
+            ActiveBuffs[newBuff.BuffType].currentStacks = newBuff.buffStacks;
+            OnBuffAdded?.Invoke(newBuff);
         }
-        //display buff
     }
 
-    public void RemoveBuff(Buff buff)
+    private void RemoveBuff(Buff buff)
     {
         if (ActiveBuffs.ContainsKey(buff.BuffType))
         {
             ActiveBuffs.Remove(buff.BuffType);
+            OnBuffRemoved?.Invoke(buff);
+        }
+    }   
+    private void RemoveBuff(BuffType buff)
+    {
+        if (ActiveBuffs.ContainsKey(buff))
+        {
+            OnBuffRemoved?.Invoke(ActiveBuffs[buff]);
+            ActiveBuffs.Remove(buff);
         }
     }
 
-    public void UpdateBuffsAtEndOfTurn()
+    private void ApplyBuffEffect(Buff buff)
     {
+        switch (buff.BuffType)
+        {
+            case BuffType.Regeneration:
+                _damageable.GetHealing(buff.currentStacks);
+                buff.currentStacks -= 2;
+                break;
+            case BuffType.Poison:
+                _damageable.TakeDamage(buff.currentStacks);
+                buff.currentStacks -= 2;
+                break;
+            case BuffType.Burn:
+                _damageable.TakeDamage(buff.currentStacks);
+                buff.currentStacks = 0;
+                break;
+            case BuffType.Ice:
+                buff.currentStacks -= 1;
+                break;
+            case BuffType.Slow:
+                break;
+            case BuffType.Fast:
+                break;
+            case BuffType.Stun:
+                break;
+            case BuffType.None:
+                break;
+            case BuffType.Spikes:
+                break;
+            case BuffType.AtkUp:
+                break;
+            case BuffType.DefUp:
+                break;
+        }
+    }
+    
+
+    private void RemoveEmptyBuffs()
+    {
+        List<BuffType> buffsToRemove=new List<BuffType>();
         foreach (var buff in ActiveBuffs)
         {
-            ActiveBuffs[buff.Key].buffStacks -= 1;
-            
-            if (ActiveBuffs[buff.Key].buffStacks <= 0) 
+            if (buff.Value.currentStacks == 0)
             {
-                RemoveBuff(buff.Value);
+                //RemoveBuff(buff.Value);
+                buffsToRemove.Add(buff.Key);
+            }
+        }
+
+        foreach (var buff in buffsToRemove)
+        {
+            RemoveBuff(buff);
+        }
+    }
+    public void UpdateBuffsAtEndOfTurn() //END OF TURN
+    {
+        if (ActiveBuffs.Count==0) {return; }
+
+        foreach (var buff in ActiveBuffs)
+        {
+            switch (buff.Value.BuffType)
+            {
+                case BuffType.Regeneration:
+                case BuffType.Burn:
+                case BuffType.Ice:
+                    ApplyBuffEffect(buff.Value);
+                    break;
             }
             // display buffs
+            OnBuffUpdated?.Invoke(buff.Value);
         }
-        
-        
-    }
+        RemoveEmptyBuffs();
 
-    private void OnDestroy()
+    }
+    public void UpdateBuffsAtBeginningOfTurn()
+    {
+        if (ActiveBuffs.Count==0) {return; }
+        foreach (var buff in ActiveBuffs)
+        {
+
+            switch (buff.Value.BuffType)
+            {
+                case BuffType.Poison:
+                    ApplyBuffEffect(buff.Value);
+                    break;
+            }
+
+            // display buffs
+            OnBuffUpdated?.Invoke(buff.Value);
+        }
+        RemoveEmptyBuffs();
+    }
+    
+    protected virtual void OnDestroy()
     {
         _damageable.OnTakeDamage -= OnTakeDamageHandler;
     }

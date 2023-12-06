@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 public enum CardType{Attack,Skill,Item}
 public enum TargetType{Self,SingleEnemy,AllEnemies,RandomEnemy}
@@ -11,6 +12,9 @@ public enum ActionType
     DrawCards,
     Heal,
     ApplyBuff,
+    Drain,
+    GainEnergy,
+    Consume
     
 }
 [CreateAssetMenu(fileName = "New Card")]
@@ -30,6 +34,6 @@ public class Card_SO : ScriptableObject
         public ActionType actionType;
         public int amount;
         public int Repetitions;
-        
+        public Buff Buff;
     }
 }

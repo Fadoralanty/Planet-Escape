@@ -5,10 +5,12 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
+public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public bool isInHandZone;
     public Action OnEndDragAction;
+    public CardUI CardUI;
+    public GameObject playerCrosshair;
     [SerializeField] private float moveBackToHandTime = 2f;
     [SerializeField] private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
@@ -19,17 +21,37 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
         _rectTransform = GetComponent<RectTransform>() ;
         _lastPosition = _rectTransform.anchoredPosition;
         _lastRotation = _rectTransform.localRotation;
+        playerCrosshair.SetActive(false);
     }
+
+    private void Update()
+    {
+
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
+        switch (CardUI.CardSo.targetType)
+        {
+            case TargetType.Self:
+                playerCrosshair.SetActive(true);
+                break;
+            case TargetType.SingleEnemy:
+                break;
+            case TargetType.AllEnemies:
+                break;
+            case TargetType.RandomEnemy:
+                break;
+        }
         transform.position = new Vector3(eventData.position.x, eventData.position.y);
         transform.rotation = quaternion.Euler(Vector3.zero);
-        _canvasGroup.alpha = 0.6f;
+        _canvasGroup.alpha = 0.5f;
         _canvasGroup.blocksRaycasts = false;
     }
-    
     public void OnEndDrag(PointerEventData eventData)
     {
+        BattleManager.Singleton.SelectedCard = null;
+        playerCrosshair.SetActive(false);
         _rectTransform.rotation = _lastRotation;
         StartCoroutine(MoveBackToHand(moveBackToHandTime));
         ResetCanvasGroup();
@@ -39,6 +61,8 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
             OnEndDragAction?.Invoke();
         }
 
+        isInHandZone = false;
+        
     }
 
     public void ResetCanvasGroup()
@@ -62,5 +86,10 @@ public class Dragable : MonoBehaviour, IDragHandler, IEndDragHandler
             yield return null;
         }
         _rectTransform.anchoredPosition = _lastPosition;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        BattleManager.Singleton.SelectedCard = CardUI.CardSo;
     }
 }

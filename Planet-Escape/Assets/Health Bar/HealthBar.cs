@@ -11,17 +11,16 @@ public class HealthBar : MonoBehaviour
     [Header("Text")] [SerializeField] private TextMeshProUGUI TMP;
     [Header("Main HealthBar")]
     [SerializeField] private Image _healthBar;
-    [SerializeField] private Color _healthBarColor = new Color(1, 0, 0, 1);
-
+    [Header("BLock bar")] 
+    [SerializeField] private GameObject blockHealthBar;
+    [SerializeField] private GameObject blockIcon;
+    [SerializeField] private TextMeshProUGUI blockTMP;
+    
     [Header("Sub HealhBar")]
     [SerializeField] private Image _healthBarDelay;
-    [SerializeField] private Color _healthBarDelayColor = new Color(1, 0.8f, 0, 0.8f);
     [SerializeField] private float _loseHealthSpeed= 0.2f;
     [SerializeField] private float _loseHPSpeedNormal= 0.2f;
     [SerializeField] private float _loseHealthSpeedOneShot= 2f;
-    [Header("Backgorund HealthBar")]
-    [SerializeField] private Image _healthBarBackground;
-    [SerializeField] private Color _healthBarBackgroundColor = new Color(0.4f, 0, 0, 1);
 
     [Header("Life Components")]
     [SerializeField] private Damageable _damageable;
@@ -30,15 +29,26 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         _damageable.OnTakeDamage += FillHealthbar;
-        InitHealthBarColor();
+        _damageable.OnBlockChange += ShowBlueHealthBar;
     }
 
-    private void InitHealthBarColor()
+    private void ShowBlueHealthBar(float block)
     {
-        _healthBar.color = _healthBarColor;
-        _healthBarDelay.color = _healthBarDelayColor;
-        _healthBarBackground.color = _healthBarBackgroundColor;
+        if (block <= 0)
+        {
+            blockHealthBar.SetActive(false);
+            blockIcon.SetActive(false);
+            blockTMP.text = "0";
+
+        }
+        else
+        {
+            blockHealthBar.SetActive(true);
+            blockIcon.SetActive(true);
+            blockTMP.text = block.ToString();
+        }
     }
+    
     private void Update()
     {
         Fill2ndHealthbar();
@@ -47,7 +57,8 @@ public class HealthBar : MonoBehaviour
     {
         _healthBar.fillAmount = currentlife/_damageable.MaxLife;
         _loseHealthSpeed = _loseHPSpeedNormal;
-        TMP.text = currentlife + " / " + _damageable.MaxLife;
+        TMP.text = _damageable.CurrentLife + " / " + _damageable.MaxLife;
+        ShowBlueHealthBar(_damageable.CurrentBlock);
     }   
     public void Fill2ndHealthbar()
     {
@@ -65,4 +76,9 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        _damageable.OnTakeDamage -= FillHealthbar;
+        _damageable.OnBlockChange -= ShowBlueHealthBar;
+    }
 }

@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
+
     public Action<float,float> OnTakeDamage { get; set; }
+    public Action<float> OnBlockChange { get; set; }
     public Action OnDie { get; set; }
     public float MaxLife => maxLife;
     [SerializeField] private float maxLife = 100;
+    public float CurrentLife => _currentLife;
     [SerializeField] private float _currentLife;
-    [SerializeField] private float _currentBlock;
     
-    public void SetData(float maxHealth)
+    public float CurrentBlock => _currentBlock;
+    [SerializeField] private float _currentBlock;
+
+
+    public void SetData(float currentHealth, float maxHealth )
     {
         maxLife = maxHealth;
-        SetCurrentLife(maxHealth);
+        SetCurrentLife(currentHealth);
         OnTakeDamage?.Invoke(_currentLife, 0);
     }
 
@@ -29,12 +35,14 @@ public class Damageable : MonoBehaviour
     public void TakeDamage(float damage)
     {
             //trigger current block chjange event
+        damage = Mathf.Round(damage);
         if (_currentBlock > 0)
         {
             _currentBlock -= damage;
+            OnBlockChange?.Invoke(_currentBlock);
             if (_currentBlock > 0)
             {
-                OnTakeDamage?.Invoke(_currentLife , 0);
+                OnTakeDamage?.Invoke(_currentLife , damage);
                 return;
             }
             else
@@ -43,32 +51,35 @@ public class Damageable : MonoBehaviour
             }
         }
         _currentLife -= damage;
-        if (IsAlive())
-        {
-            OnTakeDamage?.Invoke(_currentLife, damage);
-        }
-        else
+        OnTakeDamage?.Invoke(_currentLife, damage);
+        if (!IsAlive())
         {
             OnDie?.Invoke();
-            Die();
         }
     }
 
+    public void GetHealing(float Heal)
+    {
+        if (!IsAlive()) { return; }
+        _currentLife += Heal;
+        if (_currentLife > maxLife)
+        {
+            _currentLife = maxLife;
+        }
+        OnTakeDamage?.Invoke(_currentLife, Heal);
+    }
     public void GainBlock(float block)
     {
         _currentBlock += block;
+        OnBlockChange?.Invoke(_currentBlock);
     }
 
     public void RemoveBlock()
     {
         _currentBlock = 0;
+        OnBlockChange?.Invoke(_currentBlock);
     }
-    public void Die()
-    {
-        //Destroy(gameObject, 3f);
-        gameObject.SetActive(false);
-    }
-    
+
     private void OnDestroy()
     {
         Dispose();
