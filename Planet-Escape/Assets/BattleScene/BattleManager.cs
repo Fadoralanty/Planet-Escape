@@ -159,6 +159,7 @@ public class BattleManager : MonoBehaviour
     }
     public void DrawCards(int amountToDraw)
     {
+        if (drawPile.Count == 0 && discardPile.Count == 0) { return; }
         int cardsDrawn = 0;
         while(cardsDrawn < amountToDraw && cardsInHand.Count <= maxCardsInHand)
         {
@@ -214,6 +215,11 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    public void GainEnergy(int amount)
+    {
+        CurrentEnergy += amount;
+        EnergyText.text = CurrentEnergy.ToString();
+    }
     private void HandleMultiplier(CardUI cardUI)
     {
         if (cardsPlayed.Count > 0)

@@ -10,28 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
-  m_Name: Greanade
+  m_Name: Steroids
   m_EditorClassIdentifier: 
-  CardName: Greanade
-  CardDescription: 'Deals 20 Damage to all enemies
-
-    Consume'
-  CardCost: 3
-  CardType: 2
-  CardIcon: {fileID: 21300000, guid: 2e223b8f44d8cbd47bd0ccb4ae949f62, type: 3}
+  CardName: Steroids
+  CardDescription: Gain 1 AtkUp
+  CardCost: 1
+  CardType: 1
+  CardIcon: {fileID: 21300000, guid: d96098e251de9da45a3a56174e644552, type: 3}
   _cardActions:
-  - actionType: 0
-    amount: 25
-    Repetitions: 0
-    Buff:
-      BuffType: 0
-      buffStacks: 0
-      currentStacks: 0
-  - actionType: 7
+  - actionType: 4
     amount: 0
     Repetitions: 0
     Buff:
-      BuffType: 0
-      buffStacks: 0
+      BuffType: 9
+      buffStacks: 1
       currentStacks: 0
-  targetType: 2
+  targetType: 0
