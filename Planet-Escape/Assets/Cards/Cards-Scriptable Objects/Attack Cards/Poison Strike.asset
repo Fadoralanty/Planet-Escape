@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2bad0a3d5037e469b435252d906a00, type: 3}
+  m_Name: Poison Strike
+  m_EditorClassIdentifier: 
+  CardName: Poison Strike
+  CardDescription: 'Deals 6 Damage
+
+    Apply 3 Poison'
+  CardCost: 1
+  CardType: 0
+  CardIcon: {fileID: 21300000, guid: 32cf8bcf58300fa45a3bb5ed0086b587, type: 3}
+  _cardActions:
+  - actionType: 0
+    amount: 6
+    Repetitions: 0
+    Buff:
+      BuffType: 0
+      buffStacks: 0
+      currentStacks: 0
+  - actionType: 4
+    amount: 0
+    Repetitions: 0
+    Buff:
+      BuffType: 2
+      buffStacks: 3
+      currentStacks: 0
+  targetType: 1

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48a24575264c5d4eb3991356e9f1f11, type: 3}
+  m_Name: Survivor
+  m_EditorClassIdentifier: 
+  playerCharacterName: Survivor
+  maxHealth: 75
+  defaultDeck:
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: e82c9c09e7674db4eb34478d7862a411, type: 2}
