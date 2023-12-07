@@ -7,6 +7,8 @@ public class PlayerSO : ScriptableObject
     public string PlayerCharacterName => playerCharacterName;
     [SerializeField] private string playerCharacterName;
     public int MaxHealth => maxHealth;
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int maxHealth;    
+    public List<Card_SO> DefaultDeck => defaultDeck;
+    [SerializeField] private List<Card_SO> defaultDeck;
 
 }

@@ -127,10 +127,30 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: a255773e5149fb0408cb9d14035be651, type: 2}
+    - target: {fileID: 5973421104271845922, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5973421104271845924, guid: 922c78f41156caf479d068406b52566a, type: 3}
       propertyPath: _enemySo
       value: 
       objectReference: {fileID: 11400000, guid: 9f97b78a96fa78043a343c617149c23b, type: 2}
+    - target: {fileID: 6386868682581806004, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 169.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386868682581806004, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 256.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386868682581806004, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -12.896
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386868682581806004, guid: 922c78f41156caf479d068406b52566a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.565
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 922c78f41156caf479d068406b52566a, type: 3}
 --- !u!1 &2824694000248961768 stripped

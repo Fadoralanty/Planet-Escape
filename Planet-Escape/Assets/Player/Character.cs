@@ -102,7 +102,7 @@ public abstract class Character : MonoBehaviour
         List<BuffType> buffsToRemove=new List<BuffType>();
         foreach (var buff in ActiveBuffs)
         {
-            if (buff.Value.currentStacks == 0)
+            if (buff.Value.currentStacks <= 0)
             {
                 //RemoveBuff(buff.Value);
                 buffsToRemove.Add(buff.Key);
