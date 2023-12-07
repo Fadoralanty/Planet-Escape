@@ -14,3 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacterName: Survivor
   maxHealth: 75
+  defaultDeck:
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: f73f8bb0720f0a34386ace2135c139aa, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: 6c6f9184d8c54cf41beae99461b33263, type: 2}
+  - {fileID: 11400000, guid: e82c9c09e7674db4eb34478d7862a411, type: 2}
